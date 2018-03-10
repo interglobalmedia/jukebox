@@ -1,0 +1,208 @@
+// styling for the body
+body {
+    background: url('images/marcela-laskoski-118684.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Oxygen', sans-serif;
+}
+
+// styling for jukebox wrapper container
+.wrapper-container {
+    grid-template-columns: 1(fr);
+    width: 100%;
+    max-width: 500px;
+    margin: 60px auto;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+// app title styling
+#groove {
+    color: #caff70;
+    margin-bottom: 0;
+}
+
+#audio {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 800px;
+}
+
+// audio playlist styling
+// #list contains single li connected to audio element
+// where the audio src is copied from the li and injected
+// into the src of the source tag
+#list {
+    margin: 0 auto;
+    background: transparent;
+    max-width: 800px;
+    width: 90%;
+    height: 90px;
+    color: #caff70;
+    list-style-type: none;
+}
+
+// generic li styling for the single li in #list
+li {
+    color: #caff70;
+    list-style: none;
+}
+
+// complete song list container
+#songdiv {
+    height: 90px;
+    width: auto;
+    text-align: center;
+    margin: -40px auto 60px;
+    overflow-y: auto;
+}
+
+// everything in #songdiv should be centered
+#songdiv * {
+    text-align: center;
+}
+
+// span container for printing out trackId, songName,  
+// artist, and duration data attributes
+#result {
+    color: thistle;
+}
+
+// song list styling
+.song {
+    line-height: 2;
+    font-size: 1.3rem;
+    cursor: pointer;
+    // color: #caff70;
+    /* BOTH of the following are required for text-overflow */
+    white-space: wrap;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: auto;
+    width: 95%;
+    margin-left: 10px;
+}
+
+.song:hover {
+    color: thistle;
+}
+
+// styling for div that holds player buttons
+#buttons-div {
+    display: block;
+    margin: 40px auto;
+}
+
+li.active {
+    color: tomato;
+    line-height: 2;
+    font-size: 1.3rem;
+    cursor: pointer;
+    // color: #caff70;
+    /* BOTH of the following are required for text-overflow */
+    white-space: wrap;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: auto;
+    width: 95%;
+    margin-left: 10px;
+}
+
+// generic button styling necessary in order to get rid of default
+button {
+    margin: 15px 3px 0;
+    cursor: pointer;
+}
+
+// next, prev, and play buttons styling
+#next,
+#prev,
+#play,
+#stop,
+#shuffle {
+    font-size: 2rem;
+    border-radius: 5px;
+    color: #ffc600;
+    background: none;
+}
+
+// inputs container styling
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+//  add new song inputs styling
+#addTrackId,
+#addSongName,
+#addSrc,
+#addArtist,
+#addDuration {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    width: 200px;
+    height: 30px;
+    font-size: 1.3rem;
+}
+
+// style the instructions desc paragraph
+.paraDesc {
+    color: #caff70;
+    font-size: 1.3rem;
+    line-height: 2;
+}
+
+// instructions styling
+.para-heading {
+    color: #ffc600;
+}
+
+// submit new song button styling
+#submitSong {
+    background: none;
+    font-size: 2rem;
+    color: #ffc600;
+    border-radius: 5px;
+}
+
+// footer styling
+footer {
+    width: 100%;
+    height: 50px;
+}
+
+.site-footer p {
+    color: #caff70;
+    text-align: center;
+    font-size: 1.3rem;
+    letter-spacing: .1em;
+}
+
+// end footer styling
+// Sticky Footer styling
+:root {
+    --space: 1.5em 0;
+    --space: 2em 0;
+}
+
+.Site {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.Site-content {
+    flex: 1 0 auto;
+    padding: var(--space) var(--space) 0;
+    width: 100%;
+}
+
+.Site-content:after {
+    content: '\00a0';
+    display: block;
+    margin-top: var(--space);
+    height: 0;
+    visibility: hidden;
+}
