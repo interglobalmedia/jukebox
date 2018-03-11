@@ -188,7 +188,9 @@ button {
   max-width: 120px;
   font-size: 2rem;
   color: #ffc600;
-  border-radius: 5px; }
+  border-radius: 5px;
+  margin: 0 auto;
+  text-align: center; }
 
 footer {
   width: 100%;
