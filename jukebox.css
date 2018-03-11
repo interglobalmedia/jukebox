@@ -70,7 +70,8 @@ li {
   text-align: center; }
 
 #result {
-  color: thistle; }
+  color: thistle;
+  margin-top: 40px; }
 
 .song {
   line-height: 2;
@@ -89,7 +90,7 @@ li {
 
 #buttons-div {
   display: block;
-  margin: 40px auto; }
+  margin: 0 auto; }
 
 li.active {
   color: tomato;

@@ -95,6 +95,7 @@ li {
 // artist, and duration data attributes
 #result {
     color: thistle;
+    margin-top: 40px;
 }
 
 // song list styling
@@ -119,7 +120,7 @@ li {
 // styling for div that holds player buttons
 #buttons-div {
     display: block;
-    margin: 40px auto;
+    margin: 0 auto;
 }
 
 li.active {
