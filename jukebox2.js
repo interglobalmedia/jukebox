@@ -64,7 +64,7 @@ function Jukebox() {
         // set id attribute for resetSongsDiv
         resetSongsDiv.setAttribute('id', 'reset');
         // set resetSongsDiv innerHTML
-        resetSongsDiv.innerHTML = `&#10226;`;
+        resetSongsDiv.innerHTML = `<i class="material-icons">refresh</i>`;
         searchContainer.appendChild(resetSongsDiv);
 
         // create audio element
