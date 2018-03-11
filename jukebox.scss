@@ -17,10 +17,38 @@ body {
     align-items: center;
 }
 
+.search-container {
+    width: 100%;
+    max-width: 800px;
+    display: inline-block;
+}
+
 // app title styling
 #groove {
     color: #caff70;
     margin-bottom: 0;
+}
+
+#searchLabel {
+    color: thistle;
+    margin-top: 40px;
+}
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#search {
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    max-width: 800px;
+    width: 60%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin: 0 auto 12px;
+    border-radius: 5px;
 }
 
 #audio {
@@ -67,6 +95,7 @@ li {
 // artist, and duration data attributes
 #result {
     color: thistle;
+    margin-top: 40px;
 }
 
 // song list styling
@@ -91,7 +120,7 @@ li {
 // styling for div that holds player buttons
 #buttons-div {
     display: block;
-    margin: 40px auto;
+    margin: 0 auto;
 }
 
 li.active {
@@ -120,11 +149,21 @@ button {
 #prev,
 #play,
 #stop,
-#shuffle {
-    font-size: 2rem;
+#reset {
     border-radius: 5px;
     color: #ffc600;
     background: none;
+}
+
+#next,
+#prev,
+#play,
+#stop {
+    font-size: 2rem;
+}
+
+#reset {
+    font-size: 1.6rem;
 }
 
 // inputs container styling

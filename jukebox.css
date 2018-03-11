@@ -13,9 +13,33 @@ body {
   flex-direction: column;
   align-items: center; }
 
+.search-container {
+  width: 100%;
+  max-width: 800px;
+  display: inline-block; }
+
 #groove {
   color: #caff70;
   margin-bottom: 0; }
+
+#searchLabel {
+  color: thistle;
+  margin-top: 40px; }
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none; }
+
+#search {
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  max-width: 800px;
+  width: 60%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin: 0 auto 12px;
+  border-radius: 5px; }
 
 #audio {
   margin-top: 40px;
@@ -46,7 +70,8 @@ li {
   text-align: center; }
 
 #result {
-  color: thistle; }
+  color: thistle;
+  margin-top: 40px; }
 
 .song {
   line-height: 2;
@@ -65,7 +90,7 @@ li {
 
 #buttons-div {
   display: block;
-  margin: 40px auto; }
+  margin: 0 auto; }
 
 li.active {
   color: tomato;
@@ -88,11 +113,19 @@ button {
 #prev,
 #play,
 #stop,
-#shuffle {
-  font-size: 2rem;
+#reset {
   border-radius: 5px;
   color: #ffc600;
   background: none; }
+
+#next,
+#prev,
+#play,
+#stop {
+  font-size: 2rem; }
+
+#reset {
+  font-size: 1.6rem; }
 
 .input-container {
   display: flex;
