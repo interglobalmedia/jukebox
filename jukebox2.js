@@ -30,7 +30,42 @@ function Jukebox() {
         theGroove.setAttribute('id', 'groove');
         // append theGroove to wrapperContainer
         wrapperContainer.appendChild(theGroove);
+        // set theGroove innerHTML
         theGroove.innerHTML = `Welcome To The Groove`;
+
+        // create search input label
+        const searchLabel = document.createElement('label');
+        // create an id attribute for searchLabel
+        searchLabel.setAttribute('id', 'searchLabel');
+        // set searchlabel innerHTML
+        searchLabel.innerHTML = `search by trackId, songName, artist, or song duration:`;
+        // append searchLabel to wrapperContainer
+        wrapperContainer.appendChild(searchLabel);
+
+        // create a search container for search input and reset button
+        const searchContainer = document.createElement('div');
+        // set class attribute for searchContainer
+        searchContainer.setAttribute('class', 'search-container');
+        wrapperContainer.appendChild(searchContainer);
+
+        // create search input
+        const search = document.createElement('input');
+        // create id attribute for search
+        search.setAttribute('id', 'search');
+        // create placeholder attribute for search
+        search.setAttribute('placeholder', 'search ...');
+        // create type attribute for search
+        search.setAttribute('type', 'text');
+        // append search to wrapperConainer
+        searchContainer.appendChild(search);
+
+        // create reset button to clear search resuls
+        const resetSongsDiv = document.createElement('button');
+        // set id attribute for resetSongsDiv
+        resetSongsDiv.setAttribute('id', 'reset');
+        // set resetSongsDiv innerHTML
+        resetSongsDiv.innerHTML = `&#10226;`;
+        searchContainer.appendChild(resetSongsDiv);
 
         // create audio element
         const audio = document.createElement('audio');
@@ -348,27 +383,44 @@ function Jukebox() {
             return tracks;
         }
         this.togglePlay = function() {
-            const audio = document.getElementById('audio');
-            const audioPlay = document.getElementById('play');
-            const firstLi = document.querySelectorAll('li.selected')[0];
+                const audio = document.getElementById('audio');
+                const audioPlay = document.getElementById('play');
+                const firstLi = document.querySelectorAll('li.selected')[0];
 
-            const trackId = firstLi.getAttribute('data-trackId');
-            const songName = firstLi.getAttribute('data-songName');
-            const artist = firstLi.getAttribute('data-artist');
-            const duration = firstLi.getAttribute('data-duration');
-            const currentSpan = document.getElementById('result');
-            currentSpan.innerHTML = `${trackId} ❖ ${songName} ❖ ${artist} ❖ ${duration}`;
+                const trackId = firstLi.getAttribute('data-trackId');
+                const songName = firstLi.getAttribute('data-songName');
+                const artist = firstLi.getAttribute('data-artist');
+                const duration = firstLi.getAttribute('data-duration');
+                const currentSpan = document.getElementById('result');
+                currentSpan.innerHTML = `${trackId} ❖ ${songName} ❖ ${artist} ❖ ${duration}`;
 
-            if (audio.paused) {
-                audioPlay.innerHTML = `&#10073;&#10073;`;
-                currentTime = audio.currentTime;
-                audio.pause();
-            } else if (audio.play) {
-                audioPlay.innerHTML = `►`;
+                if (audio.paused) {
+                    audioPlay.innerHTML = `&#10073;&#10073;`;
+                    currentTime = audio.currentTime;
+                    audio.pause();
+                } else if (audio.play) {
+                    audioPlay.innerHTML = `►`;
 
+                }
+                return audio.paused ? audio.play() : audio.pause();
+                this.loadSong(trackIndex);
             }
-            return audio.paused ? audio.play() : audio.pause();
-            this.loadSong(trackIndex);
+            // text search by trackId, songName, artist, or song duration
+        this.searchSong = function() {
+            // var input, filter, ul, li, a, i;
+            const searchInput = document.getElementById("search");
+            const filterSearch = searchInput.value.toUpperCase();
+            const songDiv = document.getElementById("songdiv");
+            songs = songDiv.getElementsByTagName("li");
+            for (i = 0; i < songs.length; i++) {
+                // songs[i] represents individual song
+                songs[i] = songs[i].getElementsByTagName[0];
+                if (songs[i].innerHTML.toUpperCase().indexOf(filterSearch) > -1) {
+                    songs[i].style.display = "";
+                } else {
+                    songs[i].style.display = "none";
+                }
+            }
         }
     }
 }
@@ -405,6 +457,20 @@ jukeBox.addSongToTrack(thump_and_jump);
 jukeBox.addSongToTrack(trespass);
 
 jukeBox.displaySongs();
+
+const search = document.getElementById('search');
+search.addEventListener('change', () => {
+    jukeBox.searchSong();
+})
+
+const resetButton = document.getElementById('reset');
+resetButton.addEventListener('click', () => {
+    let searchInput = document.getElementById('search');
+    searchInput.value = ``;
+    const songDiv = document.getElementById('songdiv');
+    songDiv.innerHTML = ``;
+    jukeBox.displaySongs();
+})
 
 const playPauseAudio = document.querySelector('#play');
 const stopAudio = document.querySelector('#stop');
