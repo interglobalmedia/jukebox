@@ -43,7 +43,7 @@ function Jukebox() {
         wrapperContainer.appendChild(searchLabel);
 
         // create a search container for search input and reset button
-        const searchContainer = document.createElement('div');
+        const searchContainer = document.createElement('fieldset');
         // set class attribute for searchContainer
         searchContainer.setAttribute('class', 'search-container');
         wrapperContainer.appendChild(searchContainer);
