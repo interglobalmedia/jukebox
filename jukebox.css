@@ -92,7 +92,8 @@ li {
 
 #buttons-div {
   display: block;
-  margin: 0 auto; }
+  margin: 0 auto;
+  width: 100%; }
 
 li.active {
   color: tomato;
@@ -109,8 +110,9 @@ li.active {
 
 button {
   font-size: 2rem;
-  height: auto;
-  width: auto;
+  height: 50px;
+  max-width: 40px;
+  width: 100%;
   border-radius: 5px;
   color: #ffc600;
   background: none;
@@ -126,8 +128,9 @@ button {
 #stop,
 #reset {
   font-size: 2rem;
-  height: auto;
-  width: auto;
+  height: 50px;
+  max-width: 40px;
+  width: 100%;
   border-radius: 5px;
   color: #ffc600;
   background: none;
