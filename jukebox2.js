@@ -102,7 +102,7 @@ function Jukebox() {
         const prevSong = document.createElement('button');
         prevSong.setAttribute('id', 'prev');
         // add innerHTML to prevSong button with value of 'prev'
-        prevSong.innerHTML = `&#10094;`;
+        prevSong.innerHTML = `<i class="material-icons">navigate_before</i>`;
         // append prevSong button to buttonsContainer
         buttonsContainer.appendChild(prevSong);
 
@@ -121,7 +121,7 @@ function Jukebox() {
         // set id attribute to playPauseAudio
         playPauseAudio.setAttribute('id', 'play');
         // add innerHTML to playPauseAudio button with value of 'play'
-        playPauseAudio.innerHTML = `►`;
+        playPauseAudio.innerHTML = `<i class="material-icons">play_arrow</i>`;
         // append playPauseAudio button to buttonsContainer
         buttonsContainer.appendChild(playPauseAudio);
 
@@ -130,7 +130,7 @@ function Jukebox() {
         // set id attribute to nextSong button
         nextSong.setAttribute('id', 'next');
         // add innerHTML to nextSong button with value of 'next'
-        nextSong.innerHTML = `&#10095;`;
+        nextSong.innerHTML = `<i class="material-icons">navigate_next</i>`;
         // append nextSong button to buttonsContainer
         buttonsContainer.appendChild(nextSong);
 
@@ -395,11 +395,11 @@ function Jukebox() {
                 currentSpan.innerHTML = `${trackId} ❖ ${songName} ❖ ${artist} ❖ ${duration}`;
 
                 if (audio.paused) {
-                    audioPlay.innerHTML = `&#10073;&#10073;`;
+                    audioPlay.innerHTML = `<i class="material-icons">pause</i>`;
                     currentTime = audio.currentTime;
                     audio.pause();
                 } else if (audio.play) {
-                    audioPlay.innerHTML = `►`;
+                    audioPlay.innerHTML = `<i class="material-icons">play_arrow</i>`;
 
                 }
                 return audio.paused ? audio.play() : audio.pause();
