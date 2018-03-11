@@ -1,3 +1,8 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 // styling for the body
 body {
     background: url('images/marcela-laskoski-118684.jpg') no-repeat center center fixed;
@@ -17,11 +22,13 @@ body {
     align-items: center;
 }
 
-.search-container {
+fieldset.search-container {
     width: 100%;
     max-width: 800px;
-    display: inline-block;
     margin: 0 auto;
+    text-align: center;
+    padding: 0;
+    border: none;
 }
 
 // app title styling
@@ -33,6 +40,7 @@ body {
 #searchLabel {
     color: thistle;
     margin-top: 40px;
+    margin-bottom: 0;
 }
 
 input {
@@ -124,7 +132,6 @@ li {
     margin: 0 auto;
     width: 100%;
     text-align: center;
-    display: inline-block;
 }
 
 li.active {
@@ -182,9 +189,14 @@ button {
     cursor: pointer;
     padding-top: 5px;
     padding-bottom: 5px;
-    vertical-align: top;
+    // vertical-align: top;
     text-align: center;
     display: inline-block;
+}
+
+#reset {
+    vertical-align: top;
+    margin-bottom: 0;
 }
 
 // inputs container styling
