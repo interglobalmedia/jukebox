@@ -3,7 +3,7 @@ function Jukebox() {
     let tracks = [];
     let trackIndex = 0;
     let currentTime = 0;
-    let currentIndex = 0;
+    // let currentIndex = 0;
     this.createElements = function() {
         // create the body elment
         const body = document.createElement('body');
@@ -407,12 +407,11 @@ function Jukebox() {
             }
             // text search by trackId, songName, artist, or song duration
         this.searchSong = function() {
-            // var input, filter, ul, li, a, i;
             const searchInput = document.getElementById("search");
             const filterSearch = searchInput.value.toUpperCase();
             const songDiv = document.getElementById("songdiv");
-            songs = songDiv.getElementsByTagName("li");
-            for (i = 0; i < songs.length; i++) {
+            const songs = songDiv.getElementsByTagName("li");
+            for (let i = 0; i < songs.length; i++) {
                 // songs[i] represents individual song
                 songs[i] = songs[i].getElementsByTagName[0];
                 if (songs[i].innerHTML.toUpperCase().indexOf(filterSearch) > -1) {
@@ -459,10 +458,13 @@ jukeBox.addSongToTrack(trespass);
 jukeBox.displaySongs();
 
 const search = document.getElementById('search');
+// search input event listener
 search.addEventListener('change', () => {
     jukeBox.searchSong();
 })
 
+// reset button to clear search input and reset 
+// songDiv playlist
 const resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', () => {
     let searchInput = document.getElementById('search');
@@ -472,6 +474,7 @@ resetButton.addEventListener('click', () => {
     jukeBox.displaySongs();
 })
 
+// button variables
 const playPauseAudio = document.querySelector('#play');
 const stopAudio = document.querySelector('#stop');
 const nextSong = document.querySelector('#next');
@@ -479,6 +482,7 @@ const previousSong = document.querySelector('#prev');
 const audio = document.getElementById('audio');
 const shuffleAudio = document.getElementById('shuffle');
 
+// prevSong event listener
 previousSong.addEventListener('click', (e) => {
 
     const currentSpan = document.getElementById('result');
@@ -496,12 +500,14 @@ stopAudio.addEventListener('click', (e) => {
     audio.load();
 })
 
+// playPause button event listener
 playPauseAudio.addEventListener('click', (e) => {
 
     jukeBox.togglePlay();
 
 })
 
+// next song event listener
 nextSong.addEventListener('click', (e) => {
     // audio.pause();
 
