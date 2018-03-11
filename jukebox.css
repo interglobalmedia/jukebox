@@ -91,10 +91,10 @@ li {
   color: thistle; }
 
 #buttons-div {
-  display: block;
   margin: 0 auto;
   width: 100%;
-  text-align: center; }
+  text-align: center;
+  display: inline-block; }
 
 li.active {
   color: tomato;
@@ -122,9 +122,8 @@ button {
   cursor: pointer;
   padding-top: 5px;
   padding-bottom: 5px;
-  vertical-align: top;
   text-align: center;
-  display: inline-block; }
+  display: block; }
 
 #next.material-icons {
   font-size: 3rem; }
@@ -133,7 +132,7 @@ button {
 #prev,
 #play,
 #stop,
-#reset d {
+#reset {
   font-size: 2rem;
   height: 50px;
   max-width: 40px;
