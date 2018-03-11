@@ -112,7 +112,7 @@ button {
   font-size: 2rem;
   height: 50px;
   max-width: 40px;
-  width: 100%;
+  width: 50%;
   border-radius: 5px;
   color: #ffc600;
   background: none;
@@ -120,7 +120,8 @@ button {
   cursor: pointer;
   padding-top: 5px;
   padding-bottom: 5px;
-  vertical-align: top; }
+  vertical-align: top;
+  text-align: center; }
 
 #next,
 #prev,
@@ -130,7 +131,7 @@ button {
   font-size: 2rem;
   height: 50px;
   max-width: 40px;
-  width: 100%;
+  width: 50%;
   border-radius: 5px;
   color: #ffc600;
   background: none;
@@ -138,7 +139,8 @@ button {
   cursor: pointer;
   padding-top: 5px;
   padding-bottom: 5px;
-  vertical-align: top; }
+  vertical-align: top;
+  text-align: center; }
 
 .input-container {
   display: flex;
