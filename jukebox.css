@@ -190,7 +190,8 @@ button {
   color: #ffc600;
   border-radius: 5px;
   margin: 0 auto;
-  text-align: center; }
+  text-align: center;
+  display: block; }
 
 footer {
   width: 100%;
