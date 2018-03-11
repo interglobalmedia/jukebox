@@ -93,7 +93,8 @@ li {
 #buttons-div {
   display: block;
   margin: 0 auto;
-  width: 100%; }
+  width: 100%;
+  text-align: center; }
 
 li.active {
   color: tomato;
@@ -122,16 +123,17 @@ button {
   padding-top: 5px;
   padding-bottom: 5px;
   vertical-align: top;
-  text-align: center; }
+  text-align: center;
+  display: inline-block; }
 
 #next.material-icons {
   font-size: 3rem; }
 
-#next.material-icons,
-#prev.material-icons,
-#play.material-icons,
-#stop.material-icons,
-#reset.material-icons {
+#next,
+#prev,
+#play,
+#stop,
+#reset d {
   font-size: 2rem;
   height: 50px;
   max-width: 40px;
@@ -145,7 +147,8 @@ button {
   padding-top: 5px;
   padding-bottom: 5px;
   vertical-align: top;
-  text-align: center; }
+  text-align: center;
+  display: inline-block; }
 
 .input-container {
   display: flex;
