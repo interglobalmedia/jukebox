@@ -148,6 +148,7 @@ button {
     max-width: 40px;
     width: 50%;
     border-radius: 5px;
+    border: 1px solid white;
     color: #ffc600;
     background: none;
     margin: 0 3px 0;
@@ -158,17 +159,22 @@ button {
     text-align: center;
 }
 
+#next.material-icons {
+    font-size: 3rem;
+}
+
 // next, prev, and play buttons styling
-#next,
-#prev,
-#play,
-#stop,
-#reset {
+#next.material-icons,
+#prev.material-icons,
+#play.material-icons,
+#stop.material-icons,
+#reset.material-icons {
     font-size: 2rem;
     height: 50px;
     max-width: 40px;
     width: 50%;
     border-radius: 5px;
+    border: 1px solid white;
     color: #ffc600;
     background: none;
     margin: 0 3px 0;
@@ -211,9 +217,11 @@ button {
     color: #ffc600;
 }
 
-// submit new song button styling
+//submit new song button styling 
 #submitSong {
     background: none;
+    width: 100%;
+    max-width: 120px;
     font-size: 2rem;
     color: #ffc600;
     border-radius: 5px;
