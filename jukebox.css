@@ -108,6 +108,12 @@ li.active {
   margin-left: 10px; }
 
 button {
+  font-size: 2rem;
+  height: auto;
+  width: auto;
+  border-radius: 5px;
+  color: #ffc600;
+  background: none;
   margin: 0 3px 0;
   cursor: pointer;
   padding-top: 5px;
@@ -121,6 +127,7 @@ button {
 #reset {
   font-size: 2rem;
   height: auto;
+  width: auto;
   border-radius: 5px;
   color: #ffc600;
   background: none;
