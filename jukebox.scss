@@ -124,6 +124,7 @@ li {
     display: block;
     margin: 0 auto;
     width: 100%;
+    text-align: center;
 }
 
 li.active {
@@ -157,6 +158,7 @@ button {
     padding-bottom: 5px;
     vertical-align: top;
     text-align: center;
+    display: inline-block;
 }
 
 #next.material-icons {
@@ -164,11 +166,11 @@ button {
 }
 
 // next, prev, and play buttons styling
-#next.material-icons,
-#prev.material-icons,
-#play.material-icons,
-#stop.material-icons,
-#reset.material-icons {
+#next,
+#prev,
+#play,
+#stop,
+#reset d {
     font-size: 2rem;
     height: 50px;
     max-width: 40px;
@@ -183,6 +185,7 @@ button {
     padding-bottom: 5px;
     vertical-align: top;
     text-align: center;
+    display: inline-block;
 }
 
 // inputs container styling
