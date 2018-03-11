@@ -121,10 +121,10 @@ li {
 
 // styling for div that holds player buttons
 #buttons-div {
-    display: block;
     margin: 0 auto;
     width: 100%;
     text-align: center;
+    display: inline-block;
 }
 
 li.active {
@@ -156,9 +156,8 @@ button {
     cursor: pointer;
     padding-top: 5px;
     padding-bottom: 5px;
-    vertical-align: top;
     text-align: center;
-    display: inline-block;
+    display: block;
 }
 
 #next.material-icons {
