@@ -619,13 +619,13 @@ audio.addEventListener('progress', () => {
 // bounce to the middle of the progress bar before returning
 // to zero and advancing on audio.play().
 audio.addEventListener('durationchange', () => {
-    audio.seektimeupdate();
+    jukeBox.seektimeupdate();
 })
 
 // audio event listener for updating the time left on the progessBar
 // by the advancement of the progress thumb
 audio.addEventListener('timeupdate', () => {
-    audio.seektimeupdate();
+    jukeBox.seektimeupdate();
 })
 
 // progressBar 'mousedown' event listener
