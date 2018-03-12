@@ -36,7 +36,8 @@ fieldset.search-container {
 
 input {
   -webkit-appearance: none;
-  -moz-appearance: none; }
+  -moz-appearance: none;
+  outline: none; }
 
 #search {
   background-position: 10px 12px;
@@ -54,6 +55,31 @@ input {
   margin-top: 40px;
   width: 100%;
   max-width: 800px; }
+
+#customplayer {
+  width: 80%;
+  max-width: 800px;
+  height: 90px;
+  margin: 40px auto;
+  padding-top: 30px;
+  border: 1px solid thistle; }
+
+#seekbar,
+#volumebar {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  height: 2px;
+  background: thistle;
+  border: none;
+  vertical-align: middle; }
+
+#seekbar {
+  width: 100%;
+  max-width: 200px; }
+
+#volumebar {
+  width: 100%;
+  max-width: 100px; }
 
 #list {
   margin: 0 auto;
@@ -129,13 +155,15 @@ button {
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: center;
-  display: block; }
+  display: block;
+  outline: none; }
 
 #next,
 #prev,
 #play,
 #stop,
-#reset {
+#reset,
+#volume {
   font-size: 2rem;
   height: 50px;
   max-width: 40px;
@@ -149,11 +177,22 @@ button {
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: center;
-  display: inline-block; }
+  display: inline-block;
+  outline: none; }
 
 #reset {
   vertical-align: top;
   margin-bottom: 0; }
+
+#play,
+#volume {
+  vertical-align: middle; }
+
+#timebox {
+  color: thistle; }
+
+#currTimeText {
+  color: thistle; }
 
 .input-container {
   display: flex;

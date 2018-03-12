@@ -46,6 +46,7 @@ fieldset.search-container {
 input {
     -webkit-appearance: none;
     -moz-appearance: none;
+    outline: none;
 }
 
 #search {
@@ -65,6 +66,37 @@ input {
     margin-top: 40px;
     width: 100%;
     max-width: 800px;
+}
+
+#customplayer {
+    width: 80%;
+    max-width: 800px;
+    height: 90px;
+    margin: 40px auto;
+    padding-top: 30px;
+    border: 1px solid thistle;
+}
+
+#seekbar,
+#volumebar {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    // width: 100%;
+    // max-width: 150px;
+    height: 2px;
+    background: thistle;
+    border: none;
+    vertical-align: middle;
+}
+
+#seekbar {
+    width: 100%;
+    max-width: 200px;
+}
+
+#volumebar {
+    width: 100%;
+    max-width: 100px;
 }
 
 // audio playlist styling
@@ -165,6 +197,7 @@ button {
     padding-bottom: 5px;
     text-align: center;
     display: block;
+    outline: none;
 }
 
 // next, prev, and play buttons styling
@@ -172,7 +205,8 @@ button {
 #prev,
 #play,
 #stop,
-#reset {
+#reset,
+#volume {
     font-size: 2rem;
     height: 50px;
     max-width: 40px;
@@ -187,11 +221,25 @@ button {
     padding-bottom: 5px;
     text-align: center;
     display: inline-block;
+    outline: none;
 }
 
 #reset {
     vertical-align: top;
     margin-bottom: 0;
+}
+
+#play,
+#volume {
+    vertical-align: middle;
+}
+
+#timebox {
+    color: thistle;
+}
+
+#currTimeText {
+    color: thistle;
 }
 
 // inputs container styling
@@ -254,7 +302,7 @@ footer {
 
 // end footer styling
 // Sticky Footer styling
-:root {
+ :root {
     --space: 1.5em 0;
     --space: 2em 0;
 }
