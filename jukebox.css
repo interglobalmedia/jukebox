@@ -131,15 +131,11 @@ button {
   text-align: center;
   display: block; }
 
-#next.material-icons {
-  font-size: 3rem; }
-
 #next,
 #prev,
 #play,
 #stop,
-#reset,
-#shuffle {
+#reset {
   font-size: 2rem;
   height: 50px;
   max-width: 40px;
