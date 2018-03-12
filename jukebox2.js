@@ -2,8 +2,6 @@ function Jukebox() {
 
     let tracks = [];
     let trackIndex = 0;
-    let currentTime = 0;
-    // let currentIndex = 0;
     this.createElements = function() {
         // create the body elment
         const body = document.createElement('body');
@@ -80,15 +78,98 @@ function Jukebox() {
         // create the source element inside of audio
         // where audio file resides
         const audioSrc = document.createElement('source');
-        // add id attribute to source
+        // set id attribute to source
         audioSrc.setAttribute('id', 'source');
-        // add type attribute to source
+        // set type attribute to source
         audioSrc.setAttribute('type', 'audio/mp3');
-        // add src attribute to source
+        // set src attribute to source
         // // add first song in playlist as src value
         audioSrc.setAttribute('src', 'audio/7th_Floor_Tango.mp3');
         // append source element to audio element
         audio.appendChild(audioSrc);
+
+        // create custom player div
+        // for play/pause btn, progress, mute btn and volume
+        const customPlayer = document.createElement('div');
+        // set id attribute to customPlayer
+        customPlayer.setAttribute('id', 'customplayer');
+        // append customPlayer o wrapperContainer
+        wrapperContainer.appendChild(customPlayer);
+
+        // create playPauseAudio button
+        // toggles play/pause
+        const playPauseAudio = document.createElement('button');
+        // set id attribute to playPauseAudio
+        playPauseAudio.setAttribute('id', 'play');
+        // add innerHTML to playPauseAudio button with value of 'play'
+        playPauseAudio.innerHTML = `<i class="material-icons">play_arrow</i>`;
+        // append playPauseAudio button to buttonsContainer
+        customPlayer.appendChild(playPauseAudio);
+
+        // create progress audio progress bar
+        const progressBar = document.createElement('input');
+        // set id atribute for progressBar
+        progressBar.setAttribute('id', 'seekbar');
+        // set type attribute to progressBar
+        progressBar.setAttribute('type', 'range');
+        // set value attribute to progressBar
+        progressBar.setAttribute('value', '0');
+        // set min to progressBar
+        progressBar.setAttribute('min', '0');
+        // set max attribute to progressBar
+        progressBar.setAttribute('max', '100');
+        // set step attribute to progressBar
+        progressBar.setAttribute('step', '1');
+        // append progressBar to audio
+        customPlayer.appendChild(progressBar);
+
+        // create volumeAudio button
+        const volumeAudio = document.createElement('button');
+        // set id attribute to volumeAudio
+        volumeAudio.setAttribute('id', 'volume');
+        // add innerHTML to volumeAudio with value mute
+        volumeAudio.innerHTML = `<i class="material-icons">volume_up</i>`;
+        // append volumeAudio to customPlayer
+        customPlayer.appendChild(volumeAudio);
+
+        // create volumeBar
+        const volumeBar = document.createElement('input');
+        // set id attribute to volumeBar
+        volumeBar.setAttribute('id', 'volumebar');
+        // set type attribute to volumeBar
+        volumeBar.setAttribute('type', 'range');
+        // set min attribute to columeBar
+        volumeBar.setAttribute('min', '0');
+        // set max attribute to volumeBar
+        volumeBar.setAttribute('max', '100');
+        // set step attribute to volumeBar
+        volumeBar.setAttribute('step', '1');
+        // append volumeBar to customPlayer
+        customPlayer.appendChild(volumeBar);
+
+        // create timebox div to contain seekTimeUpdate
+        const timebox = document.createElement('div');
+        // set id attribute for timebox
+        timebox.setAttribute('id', 'timebox');
+        // add dummy innerHTML to timebox
+        // timebox.innerHTML = `time`;
+        // append timebox to customPlayer
+        customPlayer.appendChild(timebox);
+
+        // create span for currTimeText time
+        const currTimeTextSpan = document.createElement('span');
+        // set id attribute to timeTextSpan
+        currTimeTextSpan.setAttribute('id', 'currtimetext');
+        // append currTimeTextSpan to timebox
+        timebox.appendChild(currTimeTextSpan);
+
+        // create span for durTimeText time
+        const durTimeTextSpan = document.createElement('span');
+        // set id attribute to durTimeTextSpan
+        durTimeTextSpan.setAttribute('id', 'durtimetext');
+        // append durTimeTextSpan to timebox
+        timebox.appendChild(durTimeTextSpan);
+
 
         // create buttonsContainer div
         // wraps around jukebox custom buttons
@@ -114,16 +195,6 @@ function Jukebox() {
         stopAudio.innerHTML = `<i class="material-icons">stop</i>`;
         // append stopAudio to buttonsContainer
         buttonsContainer.appendChild(stopAudio);
-
-        // create playPauseAudio button
-        // toggles play/pause
-        const playPauseAudio = document.createElement('button');
-        // set id attribute to playPauseAudio
-        playPauseAudio.setAttribute('id', 'play');
-        // add innerHTML to playPauseAudio button with value of 'play'
-        playPauseAudio.innerHTML = `<i class="material-icons">play_arrow</i>`;
-        // append playPauseAudio button to buttonsContainer
-        buttonsContainer.appendChild(playPauseAudio);
 
         // create nextSong button
         const nextSong = document.createElement('button');
@@ -186,25 +257,25 @@ function Jukebox() {
         // paragraph text for instuctions re adding new song to list
         // paragraph text for instuctions re adding new song to list
         paragraphDesc.innerHTML = `<h2 class="para-heading">Songs available to add to playlist:</h2>
-        <h3>Firefly:</h3>
-        ❖
-        TrackId: 7 ❖
-        SongName: Firefly ❖ Path: audio/Firefly.mp3 ❖ Artist: Quincas Moreira ❖ Duration: 2:28 ❖ <br>
-        <h3>Psychedelicacy:</h3>
-        ❖
-        TrackId: 8 ❖ SongName: Psychedelicacy ❖ Path: audio/Psychedelicacy.mp3 ❖ Artist: Doug Maxwell ❖ Duration: 1:31 ❖<br>
-        <h3>Stranger Danger:</h3>
-        ❖
-        TrackId: 9 ❖ SongName: Stranger Danger ❖ Path: audio/Stranger_Danger.mp3 ❖ Artist: Francis Preve ❖ Duration: 1:53 ❖<br>
-        <h3>Race Car:</h3>
-        ❖
-        TrackId: 10 ❖ SongName: Race Car ❖ Path: audio/Race_Car.mp3 ❖ Artist: Rondo Brothers ❖ Duration: 1:29 ❖<br>
-        <h3>Upstairs With Cat:</h3>
-        ❖
-        TrackId: 11 ❖ SongeName: Upstairs With Cat ❖ Path: audio/Upstairs_With_Cat.mp3 ❖ Artist: Diamond Ortiz ❖ Duration: 3:33 ❖<br>
-        <h3>Wild Pogo</h3>
-        ❖
-        Trackid: 12 ❖ SongName: Wild Pogo ❖ Path: audio/Wild_Pogo.mp3 ❖ Artist: Francis Preve ❖ Duration: 2:10 ❖<br>`
+		<h3>Firefly:</h3>
+		❖
+		TrackId: 7 ❖
+		SongName: Firefly ❖ Path: audio/Firefly.mp3 ❖ Artist: Quincas Moreira ❖ Duration: 2:28 ❖ <br>
+		<h3>Psychedelicacy:</h3>
+		❖
+		TrackId: 8 ❖ SongName: Psychedelicacy ❖ Path: audio/Psychedelicacy.mp3 ❖ Artist: Doug Maxwell ❖ Duration: 1:31 ❖<br>
+		<h3>Stranger Danger:</h3>
+		❖
+		TrackId: 9 ❖ SongName: Stranger Danger ❖ Path: audio/Stranger_Danger.mp3 ❖ Artist: Francis Preve ❖ Duration: 1:53 ❖<br>
+		<h3>Race Car:</h3>
+		❖
+		TrackId: 10 ❖ SongName: Race Car ❖ Path: audio/Race_Car.mp3 ❖ Artist: Rondo Brothers ❖ Duration: 1:29 ❖<br>
+		<h3>Upstairs With Cat:</h3>
+		❖
+		TrackId: 11 ❖ SongeName: Upstairs With Cat ❖ Path: audio/Upstairs_With_Cat.mp3 ❖ Artist: Diamond Ortiz ❖ Duration: 3:33 ❖<br>
+		<h3>Wild Pogo</h3>
+		❖
+		Trackid: 12 ❖ SongName: Wild Pogo ❖ Path: audio/Wild_Pogo.mp3 ❖ Artist: Francis Preve ❖ Duration: 2:10 ❖<br>`
 
         // add inputContainer heading
         const inputContainerHeading = document.createElement('h1');
@@ -299,126 +370,181 @@ function Jukebox() {
 
             songSelect.appendChild(option);
         }
-        this.loadSong = function(id) {
+    }
+    this.loadSong = function(id) {
 
-            trackIndex = id;
+        trackIndex = id;
 
-            const audioSrc = document.getElementById('source');
-            audioSrc.src = tracks[id].src;
+        const audioSrc = document.getElementById('source');
+        audioSrc.src = tracks[id].src;
 
-            return trackIndex;
+        return trackIndex;
+    }
+    this.loadNextSong = function() {
+
+        audio.pause();
+
+        if (trackIndex === tracks.length - 1) {
+            trackIndex = 0;
+        } else {
+            trackIndex = trackIndex + 1;
         }
-        this.loadNextSong = function() {
 
+        const audioSrc = document.getElementById('source');
+        audioSrc.setAttribute('src', tracks[trackIndex].src);
+        const songListContainer = document.querySelector('#list');
+        const option = document.querySelector('li');
+        option.className = 'selected';
+        option.id = `${trackIndex}`;
+        option.setAttribute('data-id', `${trackIndex}`);
+        option.setAttribute('data-trackId', `${tracks[trackIndex].trackId}`);
+        option.setAttribute('data-songName', `${tracks[trackIndex].songName}`);
+        option.setAttribute('data-artist', `${tracks[trackIndex].artist}`);
+        option.setAttribute('data-value', `${tracks[trackIndex].src}`);
+        option.setAttribute('data-duration', `${tracks[trackIndex].duration}`);
+        const trackId = option.getAttribute('data-trackId');
+        const songName = option.getAttribute('data-songName');
+        const artist = option.getAttribute('data-artist');
+        const duration = option.getAttribute('data-duration');
+        const currentSpan = document.getElementById('result');
+        currentSpan.innerHTML = `${trackId} ❖ ${songName} ❖ ${artist} ❖ ${duration}`;
+
+        this.loadSong(trackIndex);
+        return trackIndex;
+    }
+
+    this.loadPrevSong = function() {
+
+        audio.pause();
+
+        if (trackIndex === 0) {
+            trackIndex = tracks.length - 1;
+        } else {
+            trackIndex = trackIndex - 1;
+        }
+
+        const audioSrc = document.getElementById('source');
+        audioSrc.getAttribute('src', tracks[trackIndex].src);
+        const songListContainer = document.querySelector('#list');
+        const option = document.querySelector('li');
+        option.className = 'selected';
+        option.id = `${trackIndex}`;
+        option.getAttribute('data-id', `${trackIndex}`);
+        option.getAttribute('data-trackId', `${tracks[trackIndex].trackId}`);
+        option.getAttribute('data-songName', `${tracks[trackIndex].songName}`);
+        option.getAttribute('data-artist', `${tracks[trackIndex].artist}`);
+        option.getAttribute('data-value', `${tracks[trackIndex].src}`);
+        option.getAttribute('data-duration', `${tracks[trackIndex].duration}`);
+        const currentSpan = document.getElementById('result');
+        currentSpan.innerHTML = `${tracks[trackIndex].trackId} ❖ ${tracks[trackIndex].songName} ❖ ${tracks[trackIndex].artist} ❖ ${tracks[trackIndex].duration}`;
+
+        this.loadSong(trackIndex);
+        return trackIndex;
+    }
+    this.addSong = function() {
+        let trackId = document.getElementById('addTrackId').value;
+        let songName = document.getElementById('addSongName').value;
+        let src = document.getElementById('addSrc').value;
+        let artist = document.getElementById('addArtist').value;
+        let duration = document.getElementById('addDuration').value;
+        let newSong = new Song(trackId, songName, src, artist, duration);
+        let songListContainer = document.getElementById('list');
+        tracks.push(newSong);
+        songListContainer.innerHTML = '';
+        this.displaySongs();
+        return tracks;
+    }
+    this.togglePlay = function() {
+        const audio = document.getElementById('audio');
+        const audioPlay = document.getElementById('play');
+        const firstLi = document.querySelectorAll('li.selected')[0];
+
+        const trackId = firstLi.getAttribute('data-trackId');
+        const songName = firstLi.getAttribute('data-songName');
+        const artist = firstLi.getAttribute('data-artist');
+        const duration = firstLi.getAttribute('data-duration');
+        const currentSpan = document.getElementById('result');
+        currentSpan.innerHTML = `${trackId} ❖ ${songName} ❖ ${artist} ❖ ${duration}`;
+
+        if (audio.paused) {
+            audioPlay.innerHTML = `<i class="material-icons">pause</i>`;
+            currentTime = audio.currentTime;
             audio.pause();
+        } else if (audio.play) {
+            audioPlay.innerHTML = `<i class="material-icons">play_arrow</i>`;
+        }
+        return audio.paused ? audio.play() : audio.pause();
+        this.loadSong(trackIndex);
+    }
+    this.toggleMute = function() {
+        const audio = document.getElementById('audio');
+        const volumeAudio = document.getElementById('volume');
+        const volumeBar = document.getElementById('volumebar');
+        if (audio.muted) {
+            audio.muted = false;
+            volumeAudio.innerHTML = `<i class="material-icons">volume_up</i>`;
+            volumeBar.value = `50%`;
+        } else {
+            audio.muted = true;
+            volumeAudio.innerHTML = `<i class="material-icons">volume_off</i>`;
+            volumeBar.value = 0;
+        }
 
-            if (trackIndex === tracks.length - 1) {
-                trackIndex = 0;
+    }
+    this.setvolume = function() {
+        const audio = document.getElementById('audio');
+        const volumeBar = document.getElementById('volumebar');
+        audio.volume = volumeBar.value / 100;
+    }
+    this.seek = function() {
+        let seeking;
+        const progressBar = document.getElementById('seekbar');
+        if (seeking) {
+            let seekto;
+            progressBar.value = e.clientX - progressBar.offsetLeft;
+            seekto = audio.duration * (progressBar.value / 100);
+            audio.currentTime = seekto;
+        }
+    }
+    this.seektimeupdate = function() {
+        const audio = document.getElementById('audio');
+        let progressBar = document.getElementById('seekbar');
+        // nt = new time
+        let nt = audio.currentTime * (100 / audio.duration);
+        progressBar.value = nt;
+        let currmins = Math.floor(audio.currentTime / 60);
+        let currsecs = Math.floor(audio.currentTime - currmins * 60);
+        let durmins = Math.floor(audio.duration / 60);
+        let dursecs = Math.floor(audio.duration - durmins * 60);
+        const currTimeTextSpan = document.getElementById('currtimetext');
+        const durTimeTextSpan = document.getElementById('durtimetext');
+        if (currsecs < 10) {
+            currsecs = `0${currsecs}`;
+        }
+        if (dursecs < 10) {
+            dursecs = `0${dursecs}`;
+        }
+        if (currmins < 10) {
+            currmins = `0${currmins}`;
+        }
+        if (durmins < 10) {
+            durmins = `0${durmins}`;
+        }
+        currTimeTextSpan.innerHTML = `${currmins}:${currsecs} / `;
+        durTimeTextSpan.innerHTML = `${durmins}:${dursecs}`;
+    }
+    this.searchSong = function() {
+        const searchInput = document.getElementById("search");
+        const filterSearch = searchInput.value.toUpperCase();
+        const songDiv = document.getElementById("songdiv");
+        const songs = songDiv.getElementsByTagName("li");
+        for (let i = 0; i < songs.length; i++) {
+            // songs[i] represents individual song
+            songs[i] = songs[i].getElementsByTagName[0];
+            if (songs[i].innerHTML.toUpperCase().indexOf(filterSearch) > -1) {
+                songs[i].style.display = "";
             } else {
-                trackIndex = trackIndex + 1;
-            }
-
-            const audioSrc = document.getElementById('source');
-            audioSrc.setAttribute('src', tracks[trackIndex].src);
-            const songListContainer = document.querySelector('#list');
-            const option = document.querySelector('li');
-            option.className = 'selected';
-            option.id = `${trackIndex}`;
-            option.setAttribute('data-id', `${trackIndex}`);
-            option.setAttribute('data-trackId', `${tracks[trackIndex].trackId}`);
-            option.setAttribute('data-songName', `${tracks[trackIndex].songName}`);
-            option.setAttribute('data-artist', `${tracks[trackIndex].artist}`);
-            option.setAttribute('data-value', `${tracks[trackIndex].src}`);
-            option.setAttribute('data-duration', `${tracks[trackIndex].duration}`);
-            const trackId = option.getAttribute('data-trackId');
-            const songName = option.getAttribute('data-songName');
-            const artist = option.getAttribute('data-artist');
-            const duration = option.getAttribute('data-duration');
-            const currentSpan = document.getElementById('result');
-            currentSpan.innerHTML = `${trackId} ❖ ${songName} ❖ ${artist} ❖ ${duration}`;
-
-            this.loadSong(trackIndex);
-            return trackIndex;
-        }
-
-        this.loadPrevSong = function() {
-
-            audio.pause();
-
-            if (trackIndex === 0) {
-                trackIndex = tracks.length - 1;
-            } else {
-                trackIndex = trackIndex - 1;
-            }
-
-            const audioSrc = document.getElementById('source');
-            audioSrc.getAttribute('src', tracks[trackIndex].src);
-            const songListContainer = document.querySelector('#list');
-            const option = document.querySelector('li');
-            option.className = 'selected';
-            option.id = `${trackIndex}`;
-            option.getAttribute('data-id', `${trackIndex}`);
-            option.getAttribute('data-trackId', `${tracks[trackIndex].trackId}`);
-            option.getAttribute('data-songName', `${tracks[trackIndex].songName}`);
-            option.getAttribute('data-artist', `${tracks[trackIndex].artist}`);
-            option.getAttribute('data-value', `${tracks[trackIndex].src}`);
-            option.getAttribute('data-duration', `${tracks[trackIndex].duration}`);
-            const currentSpan = document.getElementById('result');
-            currentSpan.innerHTML = `${tracks[trackIndex].trackId} ❖ ${tracks[trackIndex].songName} ❖ ${tracks[trackIndex].artist} ❖ ${tracks[trackIndex].duration}`;
-
-            this.loadSong(trackIndex);
-            return trackIndex;
-        }
-        this.addSong = function() {
-            let trackId = document.getElementById('addTrackId').value;
-            let songName = document.getElementById('addSongName').value;
-            let src = document.getElementById('addSrc').value;
-            let artist = document.getElementById('addArtist').value;
-            let duration = document.getElementById('addDuration').value;
-            let newSong = new Song(trackId, songName, src, artist, duration);
-            let songListContainer = document.getElementById('list');
-            tracks.push(newSong);
-            songListContainer.innerHTML = '';
-            this.displaySongs();
-            return tracks;
-        }
-        this.togglePlay = function() {
-                const audio = document.getElementById('audio');
-                const audioPlay = document.getElementById('play');
-                const firstLi = document.querySelectorAll('li.selected')[0];
-
-                const trackId = firstLi.getAttribute('data-trackId');
-                const songName = firstLi.getAttribute('data-songName');
-                const artist = firstLi.getAttribute('data-artist');
-                const duration = firstLi.getAttribute('data-duration');
-                const currentSpan = document.getElementById('result');
-                currentSpan.innerHTML = `${trackId} ❖ ${songName} ❖ ${artist} ❖ ${duration}`;
-
-                if (audio.paused) {
-                    audioPlay.innerHTML = `<i class="material-icons">pause</i>`;
-                    currentTime = audio.currentTime;
-                    audio.pause();
-                } else if (audio.play) {
-                    audioPlay.innerHTML = `<i class="material-icons">play_arrow</i>`;
-
-                }
-                return audio.paused ? audio.play() : audio.pause();
-                this.loadSong(trackIndex);
-            }
-            // text search by trackId, songName, artist, or song duration
-        this.searchSong = function() {
-            const searchInput = document.getElementById("search");
-            const filterSearch = searchInput.value.toUpperCase();
-            const songDiv = document.getElementById("songdiv");
-            const songs = songDiv.getElementsByTagName("li");
-            for (let i = 0; i < songs.length; i++) {
-                // songs[i] represents individual song
-                songs[i] = songs[i].getElementsByTagName[0];
-                if (songs[i].innerHTML.toUpperCase().indexOf(filterSearch) > -1) {
-                    songs[i].style.display = "";
-                } else {
-                    songs[i].style.display = "none";
-                }
+                songs[i].style.display = "none";
             }
         }
     }
@@ -474,16 +600,58 @@ resetButton.addEventListener('click', () => {
     jukeBox.displaySongs();
 })
 
+const audio = document.querySelector('#audio');
+// audio event listener for updating the time left on the progessBar
+// by the advancement of the progress thumb
+audio.addEventListener('timeupdate', () => {
+    jukeBox.seektimeupdate();
+})
+
+// audio durationchange event listener that lets me know
+// when the duration of my media has been established
+// Useful because the initial value for duration is NaN, and I
+// don't want to display that to my users
+// this also makes sure that the progress thumb does not
+// bounce to the middle of the progress bar before returning
+// to zero and advancing on audio.play().
+audio.addEventListener('durationchange', () => {
+    jukeBox.seektimeupdate();
+})
+
+// progressBar 'mousedown' event listener
+const progressBar = document.getElementById('seekbar');
+progressBar.addEventListener('mousedown', (e) => {
+    seeking = true;
+    jukeBox.seek(e);
+})
+
+// progressBar 'mousemove' event listener
+progressBar.addEventListener('mousemove', (e) => {
+    jukeBox.seek(e);
+})
+
+// progressBar 'mouseup' event listener
+progressBar.addEventListener('mouseup', () => {
+    seeking = false;
+})
+
+// volumeAudio event listener (toggles muted property)
+const volumeAudio = document.getElementById('volume');
+volumeAudio.addEventListener('click', () => jukeBox.toggleMute());
+
+// volumeBar event listener changes volume level
+const volumeBar = document.getElementById('volumebar');
+volumeBar.addEventListener('mousemove', () => jukeBox.setvolume());
+
 // button variables
 const playPauseAudio = document.querySelector('#play');
 const stopAudio = document.querySelector('#stop');
 const nextSong = document.querySelector('#next');
 const previousSong = document.querySelector('#prev');
-const audio = document.getElementById('audio');
-const shuffleAudio = document.getElementById('shuffle');
 
 // prevSong event listener
 previousSong.addEventListener('click', (e) => {
+    audio.pause();
 
     const currentSpan = document.getElementById('result');
     currentSpan.innerHTML = '';
@@ -496,8 +664,8 @@ previousSong.addEventListener('click', (e) => {
 // stop audio button event listener
 stopAudio.addEventListener('click', (e) => {
     console.log("stop clicked");
-    let currentTime = 0;
-    audio.load();
+    audio.pause();
+    audio.currentTime = 0;
 })
 
 // playPause button event listener
@@ -509,9 +677,9 @@ playPauseAudio.addEventListener('click', (e) => {
 
 // next song event listener
 nextSong.addEventListener('click', (e) => {
-    // audio.pause();
+    audio.pause();
 
-    let currentSpan = document.getElementById('result');
+    const currentSpan = document.getElementById('result');
     currentSpan.innerHTML = ``;
 
     jukeBox.loadNextSong();
@@ -540,7 +708,7 @@ songDiv.addEventListener('click', (e) => {
     const currentSpan = document.getElementById('result');
     currentSpan.innerHTML = '';
 
-    const audio = document.getElementById('audio');
+    // const audio = document.getElementById('audio');
     const audioSource = document.getElementById('source');
     audioSource.src = elem.getAttribute('data-value');
     const trackId = elem.getAttribute('data-trackId');
