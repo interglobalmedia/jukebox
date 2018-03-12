@@ -133,7 +133,7 @@ I didn't want to set the other buttons to `vertical-align: top` because I was se
 
 Last of all, as shown in the custom button styling above, I had to add custom styling to the border of the buttons. The **user agent styling** for the ***borders*** of `buttons` varies drastically across **browsers** and **mobile devices** (Android vs iOS). Once I set the border to a custom style, the border looked exactly the same everywhere.
 
-I can't emphasize enough how important it is to do **cross-browser compatibility testing** to make sure that your app looks the same everywhere. It is not enough to do a virtual device check in a browser's **Developer Tools**. More often than not, everyhing seems just fine when I do a device check in **Chrome DevTools**, **Safari** or **Firefox Responsive Mode**. Then when I check on my actual iPhone or Pixel2, things look very different!
+I can't emphasize enough how important it is to do **cross-browser compatibility testing** to make sure that your app looks the same everywhere. It is not enough to do a virtual device check in a browser's **Developer Tools**. More often than not, everyhing seems just fine when I do a device check in **Chrome DevTools**, **Safari** or **Firefox Responsive Mode**. Then when I check on my ***actual*** **iPhone** or **Google Pixel2**, things look very different!
 
 
 
