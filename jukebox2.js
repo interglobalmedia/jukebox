@@ -603,11 +603,7 @@ resetButton.addEventListener('click', () => {
 const audio = document.querySelector('#audio');
 
 audio.addEventListener('progress', () => {
-    if (audio.loading) {
-        console.log('Loading ...');
-    } else {
-        console.log('Audio loaded!');
-    }
+    console.log(`Downloading audio`);
 })
 
 
@@ -625,7 +621,9 @@ audio.addEventListener('durationchange', () => {
 // audio event listener for updating the time left on the progessBar
 // by the advancement of the progress thumb
 audio.addEventListener('timeupdate', () => {
-    jukeBox.seektimeupdate();
+    setTimeout(function() {
+        jukeBox.seektimeupdate();
+    }, 1000);
 })
 
 // progressBar 'mousedown' event listener
