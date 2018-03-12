@@ -167,17 +167,12 @@ button {
     display: block;
 }
 
-#next.material-icons {
-    font-size: 3rem;
-}
-
 // next, prev, and play buttons styling
 #next,
 #prev,
 #play,
 #stop,
-#reset,
-#shuffle {
+#reset {
     font-size: 2rem;
     height: 50px;
     max-width: 40px;
@@ -190,7 +185,6 @@ button {
     cursor: pointer;
     padding-top: 5px;
     padding-bottom: 5px;
-    // vertical-align: top;
     text-align: center;
     display: inline-block;
 }
@@ -206,7 +200,7 @@ button {
     flex-direction: column;
 }
 
-//  add new song inputs styling
+// add new song inputs styling
 #addTrackId,
 #addSongName,
 #addSrc,

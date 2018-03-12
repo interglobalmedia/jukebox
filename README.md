@@ -70,7 +70,78 @@ Then I created a new `div` in which I placed the complete list of songs (`<li></
 
 If I click on an individual song and then click on the **next** button, it resumes playing in sequence from wherever it left off from its previous click. If I had previously been taken to song number 2, I now would be taken to song number 3. Same with the **previous** button. It too resumes playing in sequence from wherever it left off from its previous click. If I had previously been taken to song number 5, I now would be taken to song number 4, etc.
 
-As for the **search** functionality, the ***user*** can conduct a **text input** ***search*** by **trackId**, **songName**, **artist**, or song **duration**. The user can **reset** his/her **search** by clicking on the **reset** button to the right of the **search** input field. The **reset** button ***clears*** the **search** input field and ***resets*** the list of songs to its previous state. That includes any ***new songs*** that have been added locally by the user. The **added songs** are only lost on **re-load/refreshing** of the **page**. Check it out!
+As for the **search** functionality, the ***user*** can conduct a **text input** ***search*** by **trackId**, **songName**, **artist**, or song **duration**. The user can **reset** his/her **search** by clicking on the **reset** button to the right of the **search** input field. The **reset** button ***clears*** the **search** input field and ***resets*** the list of songs to its previous state. That includes any ***new songs*** that have been added locally by the user. The **added songs** are only lost on **re-load/refreshing** of the **page**.
+
+Last but not least, was the issue of the ***look*** of the **Jukebox** ***buttons***. When I had **previous**, **stop**, **play/pause**, **shuffle**, and **next** buttons containing different types of icons and which all resided in one container, the buttons looked pretty much the same across browsers. There were a few little differences here and there that I was willing to overlook. The **submit** button did not pose a problem, because it was unto itself at the bottom of the page. However, when I removed the **shuffle** button from within the `buttons-div`, and added a **search** input with a **reset** button, things changed. Suddenly the differences between the buttons in the `buttons-div` became glaring on **mobile**. The **stop** button looked so much shorter than the rest of the buttons in the `buttons-div`. 
+
+Because I had not set an ***explicit*** **width** or **height** to the **previous**, **stop**, **play/pause**, **next**, and **reset** buttons, as well as some other explicit styling (I previously didn't need to), when I made structural changes, those omissions revealed themselves.
+
+The **previous**, **stop**, **play/pause**, and **next** buttons rendered very wide in **Safari** on **iOS**. The button **icons**, which were from various sources, were not centered on **mobile** on either **Android** or **iOS**. They were ***almost*** centered on **web**.
+
+The **reset** button did not align with the **search** input on **web** or **mobile**, and it was not the same height either.
+
+I fixed the **button** ***width*** problem on **iOS** by ***explicitly*** setting a **width** and **height** to the **buttons**. I was using **Google material icons** for my **stop** and **reset** buttons, and they rendered the best and most consistently. Using them as my base case, I removed the other icons which I had gotten from [toptal.com](toptal.com/designers/htmlarrows/symbols/) and replaced them with the corresponding ***Google*** **material icons**. I saw an immediate improvement. The buttons at least were starting to look more consistent across browsers. However, I was not done yet. I had to make sure that I got rid of the **user-agent styling** for the `button` **element** and replaced it with my own `custom CSS`. I did this by applying the same `custom CSS` to both the `button` **element** and the respective `ids` of the `buttons` for starters.
+
+First I had to make sure that the **reset** button aligned with the **search** input. Originally I had placed them in a `div` and wasn't able to get the two elements to align properly. That way I could not tell whether the **reset** button was the same height as the **search** input. I finally decided to change the `div` **element** to a `fieldset` **element**, and do a `global reset` of `padding: 0` and `margin: 0`. I styled the `fieldset` with the following:
+
+```
+fieldset.search-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0;
+    border: none;
+}
+```
+
+I styled the **reset** button, along with next, previous, play, and stop, with the following:
+
+```
+#next,
+#prev,
+#play,
+#stop,
+#reset {
+    font-size: 2rem;
+    height: 50px;
+    max-width: 40px;
+    width: 50%;
+    border-radius: 5px;
+    border: 1px solid white;
+    color: #ffc600;
+    background: none;
+    margin: 0 3px 0;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    display: inline-block;
+}
+```
+
+But then I added the following to the **reset** button separately:
+
+```
+#reset {
+    vertical-align: top;
+    margin-bottom: 0;
+}
+```
+
+I didn't want to set the other buttons to `vertical-align: top` because I was setting them to `display: inline-block`. When you set a ***button*** to inline-block, it's not a good idea to ***set*** the `vertical-align` **property** on it. I set the `vertical-align` **property** on the **reset** button because it did not reside in the `buttons-div` with the other buttons. It was the only way I could make the **reset** button align horizontally with the **search** input. It didn't result in adverse side effects on either **web** or **mobile**. I also made sure that I set the `text-align` **property** to `center` to the two ***parents***, `fieldset` and `buttons-div`.
+
+Last of all, as shown in the custom button styling above, I had to add custom styling to the border of the buttons. The **user agent styling** for the ***borders*** of `buttons` varies drastically across **browsers** and **mobile devices** (Android vs iOS). Once I set the border to a custom style, the border looked exactly the same everywhere.
+
+I can't emphasize enough how important it is to do **cross-browser compatibility testing** to make sure that your app looks the same everywhere. It is not enough to do a virtual device check in a browser's **Developer Tools**. More often than not, everyhing seems just fine when I do a device check in **Chrome DevTools**, **Safari** or **Firefox Responsive Mode**. Then when I check on my actual iPhone or Pixel2, things look very different!
+
+
+
+
+
+
+
+
 
 
 
