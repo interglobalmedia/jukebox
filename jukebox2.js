@@ -72,6 +72,8 @@ function Jukebox() {
         // set controls attribute to audio element to create
         // default audio player (for testing purposes only)
         // audio.setAttribute('controls', 'controls');
+        // set the preload attribute to audio
+        audio.setAttribute('preload', 'preload');
         // append audio element to wrapperContainer
         wrapperContainer.appendChild(audio);
 
@@ -81,7 +83,7 @@ function Jukebox() {
         // set id attribute to source
         audioSrc.setAttribute('id', 'source');
         // set type attribute to source
-        audioSrc.setAttribute('type', 'audio/mp3');
+        // audioSrc.setAttribute('type', 'audio/mp3');
         // set src attribute to source
         // // add first song in playlist as src value
         audioSrc.setAttribute('src', 'audio/7th_Floor_Tango.mp3');
@@ -96,6 +98,33 @@ function Jukebox() {
         // append customPlayer o wrapperContainer
         wrapperContainer.appendChild(customPlayer);
 
+        // create a bufferedDiv  for audio buffer
+        const bufferedDiv = document.createElement('div');
+        bufferedDiv.setAttribute('class', 'buffered');
+        // append bufferedDiv to customPlayer
+        customPlayer.appendChild(bufferedDiv);
+
+        // create bufferedAmoountSpan
+        const bufferedAmtSpan = document.createElement('span');
+        // set id attribute to bufferedAmtSpan
+        bufferedAmtSpan.setAttribute('id', 'bufferedAmt');
+        // append bufferedAmtSpan to customPlayer
+        bufferedDiv.appendChild(bufferedAmtSpan);
+
+        // create a progressDiv
+        const progressDiv = document.createElement('div');
+        // set class attribute to progressDiv
+        progressDiv.setAttribute('class', 'progress');
+        // append progressDiv to customPlayer
+        customPlayer.appendChild(progressDiv);
+
+        // create progressSpan
+        const progressSpan = document.createElement('span');
+        // set id attribute to progressDiv
+        progressSpan.setAttribute('id', 'progressAmt');
+        // append progressDiv to customPlayer
+        progressDiv.appendChild(progressSpan);
+
         // create playPauseAudio button
         // toggles play/pause
         const playPauseAudio = document.createElement('button');
@@ -105,6 +134,13 @@ function Jukebox() {
         playPauseAudio.innerHTML = `<i class="material-icons">play_arrow</i>`;
         // append playPauseAudio button to buttonsContainer
         customPlayer.appendChild(playPauseAudio);
+
+        // create seekDiv conainer for progressBar
+        const seekDiv = document.createElement('div');
+        // set id attribute for seekDiv
+        seekDiv.setAttribute('id', 'seekDiv');
+        // append seekDiv to customPlayer
+        customPlayer.appendChild(seekDiv);
 
         // create progress audio progress bar
         const progressBar = document.createElement('input');
@@ -121,7 +157,7 @@ function Jukebox() {
         // set step attribute to progressBar
         progressBar.setAttribute('step', '1');
         // append progressBar to audio
-        customPlayer.appendChild(progressBar);
+        seekDiv.appendChild(progressBar);
 
         // create volumeAudio button
         const volumeAudio = document.createElement('button');
@@ -131,21 +167,6 @@ function Jukebox() {
         volumeAudio.innerHTML = `<i class="material-icons">volume_up</i>`;
         // append volumeAudio to customPlayer
         customPlayer.appendChild(volumeAudio);
-
-        // create volumeBar
-        const volumeBar = document.createElement('input');
-        // set id attribute to volumeBar
-        volumeBar.setAttribute('id', 'volumebar');
-        // set type attribute to volumeBar
-        volumeBar.setAttribute('type', 'range');
-        // set min attribute to columeBar
-        volumeBar.setAttribute('min', '0');
-        // set max attribute to volumeBar
-        volumeBar.setAttribute('max', '100');
-        // set step attribute to volumeBar
-        volumeBar.setAttribute('step', '1');
-        // append volumeBar to customPlayer
-        customPlayer.appendChild(volumeBar);
 
         // create timebox div to contain seekTimeUpdate
         const timebox = document.createElement('div');
@@ -170,6 +191,10 @@ function Jukebox() {
         // append durTimeTextSpan to timebox
         timebox.appendChild(durTimeTextSpan);
 
+        // create span for current song
+        const currentSpan = document.createElement('span');
+        currentSpan.setAttribute('id', 'result');
+        timebox.appendChild(currentSpan);
 
         // create buttonsContainer div
         // wraps around jukebox custom buttons
@@ -177,7 +202,7 @@ function Jukebox() {
         // set id attribute to buttonsContainer
         buttonsContainer.setAttribute('id', 'buttons-div');
         // append buttonsContainer to wrapperContainer
-        wrapperContainer.appendChild(buttonsContainer);
+        customPlayer.appendChild(buttonsContainer);
 
         // create prevSong button
         const prevSong = document.createElement('button');
@@ -204,11 +229,6 @@ function Jukebox() {
         nextSong.innerHTML = `<i class="material-icons">navigate_next</i>`;
         // append nextSong button to buttonsContainer
         buttonsContainer.appendChild(nextSong);
-
-        // create span for current song
-        const currentSpan = document.createElement('span');
-        currentSpan.setAttribute('id', 'result');
-        wrapperContainer.appendChild(currentSpan);
 
         // add songListContainer ul to store list of songs 
         // select because responds to change event instead of click
@@ -468,40 +488,29 @@ function Jukebox() {
 
         if (audio.paused) {
             audioPlay.innerHTML = `<i class="material-icons">pause</i>`;
-            currentTime = audio.currentTime;
-            audio.pause();
         } else if (audio.play) {
             audioPlay.innerHTML = `<i class="material-icons">play_arrow</i>`;
         }
-        return audio.paused ? audio.play() : audio.pause();
+        audio.paused ? audio.play() : audio.pause();
         this.loadSong(trackIndex);
     }
     this.toggleMute = function() {
         const audio = document.getElementById('audio');
         const volumeAudio = document.getElementById('volume');
-        const volumeBar = document.getElementById('volumebar');
         if (audio.muted) {
             audio.muted = false;
             volumeAudio.innerHTML = `<i class="material-icons">volume_up</i>`;
-            volumeBar.value = `50%`;
         } else {
             audio.muted = true;
             volumeAudio.innerHTML = `<i class="material-icons">volume_off</i>`;
-            volumeBar.value = 0;
         }
-
-    }
-    this.setvolume = function() {
-        const audio = document.getElementById('audio');
-        const volumeBar = document.getElementById('volumebar');
-        audio.volume = volumeBar.value / 100;
     }
     this.seek = function() {
         let seeking;
         const progressBar = document.getElementById('seekbar');
         if (seeking) {
             let seekto;
-            progressBar.value = e.clientX - progressBar.offsetLeft;
+            progressBar.value = (e.offsetX / e.srcElement.clientWidth);
             seekto = audio.duration * (progressBar.value / 100);
             audio.currentTime = seekto;
         }
@@ -512,8 +521,8 @@ function Jukebox() {
         // nt = new time
         let nt = audio.currentTime * (100 / audio.duration);
         progressBar.value = nt;
-        let currmins = Math.floor(audio.currentTime / 60);
-        let currsecs = Math.floor(audio.currentTime - currmins * 60);
+        let currmins = parseInt((audio.currentTime / 60) % 60);
+        let currsecs = parseInt(audio.currentTime % 60);
         let durmins = Math.floor(audio.duration / 60);
         let dursecs = Math.floor(audio.duration - durmins * 60);
         const currTimeTextSpan = document.getElementById('currtimetext');
@@ -531,7 +540,7 @@ function Jukebox() {
             durmins = `0${durmins}`;
         }
         currTimeTextSpan.innerHTML = `${currmins}:${currsecs} / `;
-        durTimeTextSpan.innerHTML = `${durmins}:${dursecs}`;
+        durTimeTextSpan.innerHTML = `${durmins}:${dursecs}<br>`;
     }
     this.searchSong = function() {
         const searchInput = document.getElementById("search");
@@ -602,10 +611,34 @@ resetButton.addEventListener('click', () => {
 
 const audio = document.querySelector('#audio');
 
-audio.addEventListener('progress', () => {
-    console.log(`Downloading audio`);
-})
+// when the window is loaded, the progress event is fired as data is
+// downloaded. This is a good event to react to if I want to display
+// download or buffering progress.
 
+// the timeupdate event is fired 4 times a second as the media plays and
+// that is where I increment my player's playing progress (as with my other
+// timeupdate event associated with the progress bar containing the thumb)
+// the thistle color shows the bueffered progress and the hot pink shows
+// the played progress.
+window.onload = function() {
+    audio.addEventListener('progress', function() {
+        let duration = audio.duration;
+        if (duration > 0) {
+            for (let i = 0; i < audio.buffered.length; i++) {
+                if (audio.buffered.start(audio.buffered.length - 1 - i) < audio.currentTime) {
+                    document.getElementById('bufferedAmt').style.width = (audio.buffered.end(audio.buffered.length - 1 - i) / duration) * 100 + "%";
+                    break;
+                }
+            }
+        }
+    })
+    audio.addEventListener('timeupdate', function() {
+        let duration = audio.duration;
+        if (duration > 0) {
+            document.getElementById('progressAmt').style.width = ((audio.currentTime / duration) * 100) + "%";
+        }
+    })
+}
 
 // audio durationchange event listener that lets me know
 // when the duration of my media has been established
@@ -614,17 +647,11 @@ audio.addEventListener('progress', () => {
 // this also makes sure that the progress thumb does not
 // bounce to the middle of the progress bar before returning
 // to zero and advancing on audio.play().
-audio.addEventListener('durationchange', () => {
-    jukeBox.seektimeupdate();
-})
+// audio.addEventListener('durationchange', () => jukeBox.seektimeupdate(), false);
 
 // audio event listener for updating the time left on the progessBar
 // by the advancement of the progress thumb
-audio.addEventListener('timeupdate', () => {
-    setTimeout(function() {
-        jukeBox.seektimeupdate();
-    }, 1000);
-})
+audio.addEventListener('timeupdate', () => jukeBox.seektimeupdate(), false);
 
 // progressBar 'mousedown' event listener
 const progressBar = document.getElementById('seekbar');
@@ -639,8 +666,9 @@ progressBar.addEventListener('mousemove', (e) => {
 })
 
 // progressBar 'mouseup' event listener
-progressBar.addEventListener('mouseup', () => {
+progressBar.addEventListener('mouseup', (e) => {
     seeking = false;
+    jukeBox.seek(e);
 })
 
 // volumeAudio event listener (toggles muted property)
@@ -648,8 +676,8 @@ const volumeAudio = document.getElementById('volume');
 volumeAudio.addEventListener('click', () => jukeBox.toggleMute());
 
 // volumeBar event listener changes volume level
-const volumeBar = document.getElementById('volumebar');
-volumeBar.addEventListener('mousemove', () => jukeBox.setvolume());
+// const volumeBar = document.getElementById('volumebar');
+// volumeBar.addEventListener('mousemove', () => jukeBox.setvolume());
 
 // button variables
 const playPauseAudio = document.querySelector('#play');
@@ -658,7 +686,7 @@ const nextSong = document.querySelector('#next');
 const previousSong = document.querySelector('#prev');
 
 // prevSong event listener
-previousSong.addEventListener('click', (e) => {
+previousSong.addEventListener('click', () => {
     audio.pause();
 
     const currentSpan = document.getElementById('result');
@@ -670,21 +698,19 @@ previousSong.addEventListener('click', (e) => {
 })
 
 // stop audio button event listener
-stopAudio.addEventListener('click', (e) => {
+stopAudio.addEventListener('click', () => {
     console.log("stop clicked");
     audio.pause();
     audio.currentTime = 0;
 })
 
 // playPause button event listener
-playPauseAudio.addEventListener('click', (e) => {
-
+playPauseAudio.addEventListener('click', () => {
     jukeBox.togglePlay();
-
 })
 
 // next song event listener
-nextSong.addEventListener('click', (e) => {
+nextSong.addEventListener('click', () => {
     audio.pause();
 
     const currentSpan = document.getElementById('result');
