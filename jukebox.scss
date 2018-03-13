@@ -1,3 +1,8 @@
+// scss variables
+$max-399: '(max-width: 399px)';
+$min-400: '(min-width: 400px)';
+$min-450: '(min-width: 450px)';
+$min-600: '(min-width: 600px)';
 * {
     padding: 0;
     margin: 0;
@@ -41,6 +46,7 @@ fieldset.search-container {
     color: thistle;
     margin-top: 40px;
     margin-bottom: 0;
+    width: 97.5%;
 }
 
 input {
@@ -54,12 +60,15 @@ input {
     background-repeat: no-repeat;
     max-width: 800px;
     height: 20px;
-    width: 60%;
+    width: 65%;
     font-size: 16px;
     padding: 14px 20px 14px 40px;
     border: 1px solid #ddd;
     margin: 0 auto 12px;
     border-radius: 5px;
+    @media #{$min-450} {
+        width: 70%;
+    }
 }
 
 #audio {
@@ -69,34 +78,81 @@ input {
 }
 
 #customplayer {
-    width: 80%;
+    width: 90%;
     max-width: 800px;
-    height: 90px;
-    margin: 40px auto;
+    height: 200px;
+    margin: 40px auto 10px;
     padding-top: 30px;
     border: 1px solid thistle;
 }
 
-#seekbar,
-#volumebar {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    // width: 100%;
-    // max-width: 150px;
-    height: 2px;
+.buffered {
+    height: 10px;
+    position: relative;
     background: thistle;
-    border: none;
-    vertical-align: middle;
+    width: 100%;
+    max-width: 800px;
+    margin-top: -20px;
+    margin-bottom: 40px;
+}
+
+#bufferedAmt {
+    display: block;
+    margin-top: -20px;
+    height: 100%;
+    background: plum;
+    width: 0;
+}
+
+.progress {
+    margin-top: -40px;
+    margin-bottom: 10px;
+    height: 10px;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+#progressAmt {
+    padding-top: -40px;
+    display: block;
+    height: 100%;
+    background: hotpink;
+    width: 0;
+}
+
+#seekDiv {
+    text-align: center;
+    display: inline-block;
+    max-width: 800px;
+    width: 65%;
 }
 
 #seekbar {
-    width: 100%;
-    max-width: 200px;
-}
-
-#volumebar {
-    width: 100%;
-    max-width: 100px;
+    @media #{$max-399} {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 100%;
+        max-width: 150px;
+        height: 2px;
+        background: thistle;
+        border: none;
+        vertical-align: middle;
+    }
+    @media #{$min-400} {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 100%;
+        max-width: 200px;
+        height: 2px;
+        background: thistle;
+        border: none;
+        vertical-align: middle;
+    }
+    @media #{$min-600} {
+        width: 100%;
+        max-width: 300px;
+    }
 }
 
 // audio playlist styling
@@ -161,7 +217,7 @@ li {
 
 // styling for div that holds player buttons
 #buttons-div {
-    margin: 0 auto;
+    margin: 30px auto;
     width: 100%;
     text-align: center;
 }
@@ -196,7 +252,7 @@ button {
     padding-top: 5px;
     padding-bottom: 5px;
     text-align: center;
-    display: block;
+    display: inline-block;
     outline: none;
 }
 
@@ -236,6 +292,7 @@ button {
 
 #timebox {
     color: thistle;
+    margin-bottom: 10px;
 }
 
 #currTimeText {

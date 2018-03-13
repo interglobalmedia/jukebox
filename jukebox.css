@@ -32,7 +32,8 @@ fieldset.search-container {
 #searchLabel {
   color: thistle;
   margin-top: 40px;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  width: 97.5%; }
 
 input {
   -webkit-appearance: none;
@@ -44,12 +45,15 @@ input {
   background-repeat: no-repeat;
   max-width: 800px;
   height: 20px;
-  width: 60%;
+  width: 65%;
   font-size: 16px;
   padding: 14px 20px 14px 40px;
   border: 1px solid #ddd;
   margin: 0 auto 12px;
   border-radius: 5px; }
+  @media (min-width: 450px) {
+    #search {
+      width: 70%; } }
 
 #audio {
   margin-top: 40px;
@@ -57,29 +61,74 @@ input {
   max-width: 800px; }
 
 #customplayer {
-  width: 80%;
+  width: 90%;
   max-width: 800px;
-  height: 90px;
-  margin: 40px auto;
+  height: 200px;
+  margin: 40px auto 10px;
   padding-top: 30px;
   border: 1px solid thistle; }
 
-#seekbar,
-#volumebar {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  height: 2px;
+.buffered {
+  height: 10px;
+  position: relative;
   background: thistle;
-  border: none;
-  vertical-align: middle; }
-
-#seekbar {
   width: 100%;
-  max-width: 200px; }
+  max-width: 800px;
+  margin-top: -20px;
+  margin-bottom: 40px; }
 
-#volumebar {
+#bufferedAmt {
+  display: block;
+  margin-top: -20px;
+  height: 100%;
+  background: plum;
+  width: 0; }
+
+.progress {
+  margin-top: -40px;
+  margin-bottom: 10px;
+  height: 10px;
+  position: relative;
   width: 100%;
-  max-width: 100px; }
+  max-width: 800px; }
+
+#progressAmt {
+  padding-top: -40px;
+  display: block;
+  height: 100%;
+  background: hotpink;
+  width: 0; }
+
+#seekDiv {
+  text-align: center;
+  display: inline-block;
+  max-width: 800px;
+  width: 65%; }
+
+@media (max-width: 399px) {
+  #seekbar {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    max-width: 150px;
+    height: 2px;
+    background: thistle;
+    border: none;
+    vertical-align: middle; } }
+@media (min-width: 400px) {
+  #seekbar {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    max-width: 200px;
+    height: 2px;
+    background: thistle;
+    border: none;
+    vertical-align: middle; } }
+@media (min-width: 600px) {
+  #seekbar {
+    width: 100%;
+    max-width: 300px; } }
 
 #list {
   margin: 0 auto;
@@ -124,7 +173,7 @@ li {
   color: tomato; }
 
 #buttons-div {
-  margin: 0 auto;
+  margin: 30px auto;
   width: 100%;
   text-align: center; }
 
@@ -155,7 +204,7 @@ button {
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: center;
-  display: block;
+  display: inline-block;
   outline: none; }
 
 #next,
@@ -189,7 +238,8 @@ button {
   vertical-align: middle; }
 
 #timebox {
-  color: thistle; }
+  color: thistle;
+  margin-bottom: 10px; }
 
 #currTimeText {
   color: thistle; }
