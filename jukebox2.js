@@ -3,7 +3,7 @@ function Jukebox() {
     let tracks = [];
     let trackIndex = 0;
     this.createElements = function() {
-        // create the body elment
+        // create the body element
         const body = document.createElement('body');
         document.body.setAttribute('class', 'Site');
 
@@ -57,7 +57,7 @@ function Jukebox() {
         // append search to wrapperConainer
         searchContainer.appendChild(search);
 
-        // create reset button to clear search resuls
+        // create reset button to clear search results
         const resetSongsDiv = document.createElement('button');
         // set id attribute for resetSongsDiv
         resetSongsDiv.setAttribute('id', 'reset');
@@ -72,8 +72,6 @@ function Jukebox() {
         // set controls attribute to audio element to create
         // default audio player (for testing purposes only)
         // audio.setAttribute('controls', 'controls');
-        // set the preload attribute to audio
-        audio.setAttribute('preload', 'preload');
         // append audio element to wrapperContainer
         wrapperContainer.appendChild(audio);
 
@@ -83,7 +81,7 @@ function Jukebox() {
         // set id attribute to source
         audioSrc.setAttribute('id', 'source');
         // set type attribute to source
-        // audioSrc.setAttribute('type', 'audio/mp3');
+        audioSrc.setAttribute('type', 'audio/mp3');
         // set src attribute to source
         // // add first song in playlist as src value
         audioSrc.setAttribute('src', 'audio/7th_Floor_Tango.mp3');
@@ -98,13 +96,13 @@ function Jukebox() {
         // append customPlayer o wrapperContainer
         wrapperContainer.appendChild(customPlayer);
 
-        // create a bufferedDiv  for audio buffer
+        // create a bufferedDiv for audio buffer
         const bufferedDiv = document.createElement('div');
         bufferedDiv.setAttribute('class', 'buffered');
         // append bufferedDiv to customPlayer
         customPlayer.appendChild(bufferedDiv);
 
-        // create bufferedAmoountSpan
+        // create bufferedAmtSpan
         const bufferedAmtSpan = document.createElement('span');
         // set id attribute to bufferedAmtSpan
         bufferedAmtSpan.setAttribute('id', 'bufferedAmt');
@@ -135,40 +133,40 @@ function Jukebox() {
         // append playPauseAudio button to buttonsContainer
         customPlayer.appendChild(playPauseAudio);
 
-        // create seekDiv conainer for progressBar
+        // create seekDiv container for seekProgress bar
         const seekDiv = document.createElement('div');
         // set id attribute for seekDiv
-        seekDiv.setAttribute('id', 'seekDiv');
+        seekDiv.setAttribute('id', 'seekdiv');
         // append seekDiv to customPlayer
         customPlayer.appendChild(seekDiv);
 
-        // create progress audio progress bar
-        const progressBar = document.createElement('input');
-        // set id atribute for progressBar
-        progressBar.setAttribute('id', 'seekbar');
-        // set type attribute to progressBar
-        progressBar.setAttribute('type', 'range');
-        // set value attribute to progressBar
-        progressBar.setAttribute('value', '0');
-        // set min to progressBar
-        progressBar.setAttribute('min', '0');
-        // set max attribute to progressBar
-        progressBar.setAttribute('max', '100');
-        // set step attribute to progressBar
-        progressBar.setAttribute('step', '1');
-        // append progressBar to audio
-        seekDiv.appendChild(progressBar);
+        // create progress audio seekProgress bar
+        const seekProgress = document.createElement('input');
+        // set id atribute for seekProgress
+        seekProgress.setAttribute('id', 'seekprogress');
+        // set type attribute to seekProgress
+        seekProgress.setAttribute('type', 'range');
+        // set value attribute to seekProgress
+        seekProgress.setAttribute('value', '0');
+        // set min attribute to seekProgress
+        seekProgress.setAttribute('min', '0');
+        // set max attribute to seekProgress
+        seekProgress.setAttribute('max', '100');
+        // set step attribute to seekProgress
+        seekProgress.setAttribute('step', '1');
+        // append progressBar to seekDiv
+        seekDiv.appendChild(seekProgress);
 
         // create volumeAudio button
         const volumeAudio = document.createElement('button');
         // set id attribute to volumeAudio
         volumeAudio.setAttribute('id', 'volume');
-        // add innerHTML to volumeAudio with value mute
+        // add innerHTML to volumeAudio with value volume_up
         volumeAudio.innerHTML = `<i class="material-icons">volume_up</i>`;
         // append volumeAudio to customPlayer
         customPlayer.appendChild(volumeAudio);
 
-        // create timebox div to contain seekTimeUpdate
+        // create timebox div to contain seektimeupdate
         const timebox = document.createElement('div');
         // set id attribute for timebox
         timebox.setAttribute('id', 'timebox');
@@ -177,24 +175,24 @@ function Jukebox() {
         // append timebox to customPlayer
         customPlayer.appendChild(timebox);
 
-        // create span for currTimeText time
+        // create span for currTimeTextSpan time
         const currTimeTextSpan = document.createElement('span');
-        // set id attribute to timeTextSpan
+        // set id attribute to currTimeTextSpan
         currTimeTextSpan.setAttribute('id', 'currtimetext');
         // append currTimeTextSpan to timebox
         timebox.appendChild(currTimeTextSpan);
 
-        // create span for durTimeText time
+        // create span for durTimeTextSpan time
         const durTimeTextSpan = document.createElement('span');
         // set id attribute to durTimeTextSpan
         durTimeTextSpan.setAttribute('id', 'durtimetext');
         // append durTimeTextSpan to timebox
         timebox.appendChild(durTimeTextSpan);
 
-        // create span for current song
+        // create span for currentSpan song
         const currentSpan = document.createElement('span');
         currentSpan.setAttribute('id', 'result');
-        timebox.appendChild(currentSpan);
+        wrapperContainer.appendChild(currentSpan);
 
         // create buttonsContainer div
         // wraps around jukebox custom buttons
@@ -202,7 +200,7 @@ function Jukebox() {
         // set id attribute to buttonsContainer
         buttonsContainer.setAttribute('id', 'buttons-div');
         // append buttonsContainer to wrapperContainer
-        customPlayer.appendChild(buttonsContainer);
+        wrapperContainer.appendChild(buttonsContainer);
 
         // create prevSong button
         const prevSong = document.createElement('button');
@@ -212,7 +210,7 @@ function Jukebox() {
         // append prevSong button to buttonsContainer
         buttonsContainer.appendChild(prevSong);
 
-        // create stop button
+        // create stopAudio button
         const stopAudio = document.createElement('button');
         // set id attribute to stopAudio
         stopAudio.setAttribute('id', 'stop');
@@ -231,7 +229,6 @@ function Jukebox() {
         buttonsContainer.appendChild(nextSong);
 
         // add songListContainer ul to store list of songs 
-        // select because responds to change event instead of click
         const songListContainer = document.createElement('ul');
         // set id attribute to songListContainer
         songListContainer.setAttribute('id', 'list');
@@ -249,6 +246,7 @@ function Jukebox() {
 
         // create a fieldset in which to place songList select 
         const songDiv = document.createElement('div');
+        // set id attribute to songDiv
         songDiv.setAttribute('id', 'songdiv');
 
         wrapperContainer.appendChild(songDiv);
@@ -257,7 +255,7 @@ function Jukebox() {
 
         // add inputContainer
         const inputContainer = document.createElement('div');
-        // add id attribute
+        // set id attribute to inputContainer
         inputContainer.setAttribute('id', 'input-container');
         // append inputContainer to wrapperContainer
         wrapperContainer.appendChild(inputContainer);
@@ -265,14 +263,16 @@ function Jukebox() {
         // add input instructions div
         // for instructions on how to add new song
         const inputInstructions = document.createElement('div');
-        // add id attribute
+        // set id attribute to inputInstructions
         inputInstructions.setAttribute('id', 'addInstructions');
         // append inputInstructions to inputContainer
         inputContainer.appendChild(inputInstructions);
 
         // add paragraph to inputContainer
         const paragraphDesc = document.createElement('p');
+        // set class attribute to paragraphDesc
         paragraphDesc.setAttribute('class', 'paraDesc');
+        // append paragraphDesc to inputContainer
         inputContainer.appendChild(paragraphDesc);
         // paragraph text for instuctions re adding new song to list
         // paragraph text for instuctions re adding new song to list
@@ -297,63 +297,63 @@ function Jukebox() {
 		❖
 		Trackid: 12 ❖ SongName: Wild Pogo ❖ Path: audio/Wild_Pogo.mp3 ❖ Artist: Francis Preve ❖ Duration: 2:10 ❖<br>`
 
-        // add inputContainer heading
+        // create inputContainer heading
         const inputContainerHeading = document.createElement('h1');
-        // add inputContainerHeading id attribute
+        // set id attribute to inputContainerHeading 
         inputContainerHeading.setAttribute('id', 'inputContainerHead');
         // append inputContainerHeading to inputContainer
         inputContainer.appendChild(inputContainerHeading);
         inputContainerHeading.innerHTML = `Additional Songs:`
         inputContainerHeading.style.color = `#ffc600`;
 
-        // add trackId input
+        // create addTrackId input
         const addTrackId = document.createElement('input');
-        // add id attribute
+        // set id attribute to addTrackId input
         addTrackId.setAttribute('id', 'addTrackId');
-        // add placeholder attribute
+        // set placeholder attribute to addTrackId input
         addTrackId.setAttribute('placeholder', 'track id here');
         // append addTrackId to inputContainer
         inputContainer.appendChild(addTrackId);
 
-        // add songName input
+        // create addSongName input
         const addSongName = document.createElement('input');
-        // add id attribute
+        // set id attribute to addSongName
         addSongName.setAttribute('id', 'addSongName');
-        // add placeholder attribute
+        // set placeholder attribute to addSongName
         addSongName.setAttribute('placeholder', 'song name here');
         // append addSongName to inputContainer
         inputContainer.appendChild(addSongName);
 
-        // add src input
+        // create addSrc input
         const addSrc = document.createElement('input');
-        // add id attribute
+        // set id attribute to addSrc
         addSrc.setAttribute('id', 'addSrc');
-        // add placeholder attribute
+        // set placeholder attribute to addSrc
         addSrc.setAttribute('placeholder', 'path to song here');
-        // append addSrc o input Container
+        // append addSrc to inputContainer
         inputContainer.appendChild(addSrc);
 
-        // add artist input
+        // create addArtist input
         const addArtist = document.createElement('input');
-        // add id attribute
+        // set id attribute to addArtist
         addArtist.setAttribute('id', 'addArtist');
-        // add placeholder attribute
+        // set placeholder attribute to addArtist
         addArtist.setAttribute('placeholder', 'artist here');
         // append addArtist to inputContainer
         inputContainer.appendChild(addArtist);
 
-        // add duration input
+        // create addDuration input
         const addDuration = document.createElement('input');
-        // add id attribute
+        // set id attribute to addDuration
         addDuration.setAttribute('id', 'addDuration');
-        // add placeholder attribute
+        // set placeholder attribute to addDuration
         addDuration.setAttribute('placeholder', 'song duration here');
         // append addDuration to inputContainer
         inputContainer.appendChild(addDuration);
 
         // add submitBtn to add new songs to playlist
         const submitBtn = document.createElement('button');
-        // add id attribute
+        // set id attribute to submitBtn
         submitBtn.setAttribute('id', 'submitSong');
         // add button text with innerHTML property
         submitBtn.innerHTML = `submit`;
@@ -362,7 +362,7 @@ function Jukebox() {
 
         // create footer
         const footer = document.createElement('footer');
-        // set class attribute
+        // set class attribute to footer
         footer.setAttribute('class', 'site-footer');
         document.body.appendChild(footer);
         footer.innerHTML = `<p>&dagger; © 2018 Maria D. Campbell &dagger;</p>`;
@@ -477,14 +477,6 @@ function Jukebox() {
     this.togglePlay = function() {
         const audio = document.getElementById('audio');
         const audioPlay = document.getElementById('play');
-        const firstLi = document.querySelectorAll('li.selected')[0];
-
-        const trackId = firstLi.getAttribute('data-trackId');
-        const songName = firstLi.getAttribute('data-songName');
-        const artist = firstLi.getAttribute('data-artist');
-        const duration = firstLi.getAttribute('data-duration');
-        const currentSpan = document.getElementById('result');
-        currentSpan.innerHTML = `${trackId} ❖ ${songName} ❖ ${artist} ❖ ${duration}`;
 
         if (audio.paused) {
             audioPlay.innerHTML = `<i class="material-icons">pause</i>`;
@@ -505,24 +497,25 @@ function Jukebox() {
             volumeAudio.innerHTML = `<i class="material-icons">volume_off</i>`;
         }
     }
-    this.seek = function() {
-        let seeking;
-        const progressBar = document.getElementById('seekbar');
-        if (seeking) {
-            let seekto;
-            progressBar.value = (e.offsetX / e.srcElement.clientWidth);
-            seekto = audio.duration * (progressBar.value / 100);
+    this.seek = function(e) {
+        let seeking = false;
+        let seekto;
+        const seekProgress = document.getElementById('seekprogress');
+        if (seeking === true) {
+            seekProgress.value = (e.clientX - seekProgress.offsetLeft);
+            seekto = audio.duration * (seekProgress.value / 100);
             audio.currentTime = seekto;
         }
     }
     this.seektimeupdate = function() {
+        // related printing curr time / duration to timebox
         const audio = document.getElementById('audio');
-        let progressBar = document.getElementById('seekbar');
+        const seekProgress = document.getElementById('seekprogress');
         // nt = new time
         let nt = audio.currentTime * (100 / audio.duration);
-        progressBar.value = nt;
-        let currmins = parseInt((audio.currentTime / 60) % 60);
-        let currsecs = parseInt(audio.currentTime % 60);
+        seekProgress.value = nt;
+        let currmins = Math.floor(audio.currentTime / 60);
+        let currsecs = Math.floor(audio.currentTime - currmins * 60);
         let durmins = Math.floor(audio.duration / 60);
         let dursecs = Math.floor(audio.duration - durmins * 60);
         const currTimeTextSpan = document.getElementById('currtimetext');
@@ -653,23 +646,38 @@ window.onload = function() {
 // by the advancement of the progress thumb
 audio.addEventListener('timeupdate', () => jukeBox.seektimeupdate(), false);
 
-// progressBar 'mousedown' event listener
-const progressBar = document.getElementById('seekbar');
-progressBar.addEventListener('mousedown', (e) => {
-    seeking = true;
+// audio.addEventListener('canplaythrough', () => {
+//     let duration;
+//     duration = audio.duration;
+// })
+
+// progressBar 'mousedown'
+// event listener
+const seekProgress = document.getElementById('seekprogress');
+seekProgress.addEventListener('mousedown', (e) => {
+    let seeking = true;
     jukeBox.seek(e);
 })
 
-// progressBar 'mousemove' event listener
-progressBar.addEventListener('mousemove', (e) => {
+// progressBar 'mousemove'
+// event listener
+seekProgress.addEventListener('mousemove', (e) => {
     jukeBox.seek(e);
 })
 
-// progressBar 'mouseup' event listener
-progressBar.addEventListener('mouseup', (e) => {
+// progressBar 'mouseup'
+// event listener
+seekProgress.addEventListener('mouseup', (e) => {
     seeking = false;
-    jukeBox.seek(e);
 })
+
+// https://stackoverflow.com/questions/41076205/use-input-type-range-to-seek-audio
+// Set max value when you know the duration
+audio.onloadedmetadata = () => seekProgress.max = audio.duration;
+// update audio position
+seekProgress.onchange = () => audio.currentTime = seekProgress.value;
+// update range input when currentTime updates
+audio.ontimeupdate = () => seekProgress.value = audio.currentTime;
 
 // volumeAudio event listener (toggles muted property)
 const volumeAudio = document.getElementById('volume');
