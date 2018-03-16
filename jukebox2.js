@@ -479,11 +479,12 @@ function Jukebox() {
         const audioPlay = document.getElementById('play');
 
         if (audio.paused) {
+            audio.play();
             audioPlay.innerHTML = `<i class="material-icons">pause</i>`;
         } else if (audio.play) {
+            audio.pause();
             audioPlay.innerHTML = `<i class="material-icons">play_arrow</i>`;
         }
-        audio.paused ? audio.play() : audio.pause();
         this.loadSong(trackIndex);
     }
     this.toggleMute = function() {
@@ -502,7 +503,7 @@ function Jukebox() {
         let seekto;
         const seekProgress = document.getElementById('seekprogress');
         if (seeking === true) {
-            seekProgress.value = (e.clientX - seekProgress.offsetLeft);
+            seekProgress.value = e.clientX - seekProgress.offsetLeft;
             seekto = audio.duration * (seekProgress.value / 100);
             audio.currentTime = seekto;
         }
@@ -517,7 +518,7 @@ function Jukebox() {
         let currmins = Math.floor(audio.currentTime / 60);
         let currsecs = Math.floor(audio.currentTime - currmins * 60);
         let durmins = Math.floor(audio.duration / 60);
-        let dursecs = Math.floor(audio.duration - durmins * 60);
+        let dursecs = parseFloat(Math.floor(audio.duration - durmins * 60));
         const currTimeTextSpan = document.getElementById('currtimetext');
         const durTimeTextSpan = document.getElementById('durtimetext');
         if (currsecs < 10) {
@@ -532,8 +533,8 @@ function Jukebox() {
         if (durmins < 10) {
             durmins = `0${durmins}`;
         }
-        currTimeTextSpan.innerHTML = `${currmins}:${currsecs} / `;
-        durTimeTextSpan.innerHTML = `${durmins}:${dursecs}<br>`;
+        currTimeTextSpan.innerHTML = `${currmins}:${currsecs}`;
+        // durTimeTextSpan.innerHTML = `${durmins}:${dursecs}<br>`;
     }
     this.searchSong = function() {
         const searchInput = document.getElementById("search");
@@ -671,14 +672,6 @@ seekProgress.addEventListener('mouseup', (e) => {
     seeking = false;
 })
 
-// https://stackoverflow.com/questions/41076205/use-input-type-range-to-seek-audio
-// Set max value when you know the duration
-audio.onloadedmetadata = () => seekProgress.max = audio.duration;
-// update audio position
-seekProgress.onchange = () => audio.currentTime = seekProgress.value;
-// update range input when currentTime updates
-audio.ontimeupdate = () => seekProgress.value = audio.currentTime;
-
 // volumeAudio event listener (toggles muted property)
 const volumeAudio = document.getElementById('volume');
 volumeAudio.addEventListener('click', () => jukeBox.toggleMute());
@@ -693,10 +686,22 @@ const stopAudio = document.querySelector('#stop');
 const nextSong = document.querySelector('#next');
 const previousSong = document.querySelector('#prev');
 
+// https://stackoverflow.com/questions/41076205/use-input-type-range-to-seek-audio
+// Set max value when you know the duration
+audio.onloadedmetadata = () => seekProgress.max = audio.duration;
+
+// update audio position
+seekProgress.onchange = () => audio.currentTime = seekProgress.value;
+
+// update range input when currentTime updates
+audio.ontimeupdate = () => {
+    seekProgress.value = audio.currentTime;
+}
+
+
 // prevSong event listener
 previousSong.addEventListener('click', () => {
     audio.pause();
-
     const currentSpan = document.getElementById('result');
     currentSpan.innerHTML = '';
 
@@ -704,6 +709,7 @@ previousSong.addEventListener('click', () => {
     audio.load();
     audio.play();
 })
+
 
 // stop audio button event listener
 stopAudio.addEventListener('click', () => {
