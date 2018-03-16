@@ -135,7 +135,19 @@ Last of all, as shown in the custom button styling above, I had to add custom st
 
 I can't emphasize enough how important it is to do **cross-browser compatibility testing** to make sure that your app looks the same everywhere. It is not enough to do a virtual device check in a browser's **Developer Tools**. More often than not, everyhing seems just fine when I do a device check in **Chrome DevTools**, **Safari** or **Firefox Responsive Mode**. Then when I check on my ***actual*** **iPhone** or **Google Pixel2**, things look very different!
 
+**3.16.18:** I have made many more changes since the last time I pushed to Github and added content to this **README.md**.
+
+I decided to add a **progress bar** to the **jukeBox** on the suggestion of one of my ***fellow developer*** **twitter** followers. This addition, in turn, led to a slew of ***other*** additions.
+
+So first I decided to add a progress bar with a thumb slider, so I could update the currentTime of a song against its duration. This way I could scrub the audio file
+
 Check it out for yourself!
+
+**Related Resources:**
+
+[Use input type range to seek audio](https://stackoverflow.com/questions/41076205/use-input-type-range-to-seek-audio)
+
+[Using rangeslider.js for an HTML5 audio time scrubber](https://stackoverflow.com/questions/30374409/using-rangeslider-js-for-an-html5-audio-time-scrubber?rq=1)
 
 
 
