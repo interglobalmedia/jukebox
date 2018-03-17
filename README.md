@@ -135,19 +135,66 @@ Last of all, as shown in the custom button styling above, I had to add custom st
 
 I can't emphasize enough how important it is to do **cross-browser compatibility testing** to make sure that your app looks the same everywhere. It is not enough to do a virtual device check in a browser's **Developer Tools**. More often than not, everyhing seems just fine when I do a device check in **Chrome DevTools**, **Safari** or **Firefox Responsive Mode**. Then when I check on my ***actual*** **iPhone** or **Google Pixel2**, things look very different!
 
-**3.16.18:** I have made many more changes since the last time I pushed to Github and added content to this **README.md**.
+**3.16.18:** I have made many more changes since the last time I pushed to **Github** and added content to this **README.md**.
 
-I decided to add a **progress bar** to the **jukeBox** on the suggestion of one of my ***fellow developer*** **twitter** followers. This addition, in turn, led to a slew of ***other*** additions.
+I decided to add a **progress bar** with a **thumb slider** to the **jukeBox** on the suggestion of one of my ***fellow developer*** **twitter** followers. This addition, in turn, led to a slew of ***other*** additions. 
 
-So first I decided to add a progress bar with a thumb slider, so I could update the currentTime of a song against its duration. This way I could scrub the audio file
++ I added a buffer progress bar and a second animated progress bar that follows the movement of thumb on the other bar. However, I am only able to scrub the audio of the progress bar with the **thumb slider**. I did not add click functionality to the animated progress bar. It is for visual purposes only, but is in sync with the movement of the **thumb slider**. 
 
-Check it out for yourself!
++ I made the color of the song list items (`lis`) in the playlist change color on click.
+
+I added a p**rogress bar** with a **thumb slider**, so I could **update** the `currentTime` of a song against its `total duration`. This is when I started running into problems. I initially created the progress bar with an input range  element that comes with a thumb slider, but found that when I tried to slide the thumb forward,it only wanted to go back to is previous updated time. In other words, I was not able to scrub my audio!
+
+Part of the problem was that I did not **sync** the `currentTime` of the **slider** with the `currentTime` of the **progress bar** on drag. All it could do was advance with the updating of the `currentTime` along the **progress bar**. There are quirks with the audio element when you try to change the time while it is playing. As I mentioned earlier, the thumb slider snaps back to where it was. According to a thread on **StackOverflow** ([Using rangeslider.js for an HTML5 audio time scrubber](https://stackoverflow.com/questions/30374409/using-rangeslider-js-for-an-html5-audio-time-scrubber?rq=1)), as you slide across the track, the `timeupdate` event fires and changes the position of the thumb slider back to `currentTime`. To make it work properly, some additional logic would have to be implemented.
+
+That's what was happening with my **thumb slider**. I had to do quite a bit of research before I finally found my ***partial*** solution on **StackOverFlow**. See [Use input type range to seek audio](https://stackoverflow.com/questions/41076205/use-input-type-range-to-seek-audio). It consisted of the following three lines of code:
+
+```
+// Set max value when you know the duration
+audio.onloadedmetadata = () => seekbar.max = audio.duration
+// update audio position
+seekbar.onchange = () => audio.currentTime = seekbar.value
+// update range input when currentTime updates
+audio.ontimeupdate = () => seekbar.value = audio.currentTime
+```
+
+Of course I adapted it to my variable names. 
+
++ The first line of code states that when the **loaded metadata** of the **audio** has been detected, set the max value of the progressbar/seekbar to the total duration of the audio file. For those of you who may not know, **metadata** refers to the information stored in an **audio** file. Like the **artist name**, **album title**, **track title**, **genre**, **album artwork**, and **track number**.
+
++ The second line of code states that when the position of the **thumb slider** has changed, the `currentTime` of the **audio** is set to the value of the **progressbar**. In other words, the position of the **thumb**, if there is one. **Thumbs** are automatically present in **inputs** with the **type** `range`. When using **input ranges** for **audio** progress bars, the `min` value of `0` and the `max` value of `100` or `1` must be defined.
+
+The third line of code states that when the **audio** element's `currentTime` has been updated `ontimeupdate`, the value of the **progressbar** should be set to the **audio**'s `currentTime`.
+
+At this point, my **thumb** worked perfectly. I could slide it up and down the progress bar without a hitch. That was not the problem. My problem was something else. It was the appearance of NaN (Not a Number) when the `currentTime` was updated before the `total duration` of the **audio** was detected. That occurred virtually all the time. I "tore my hair out" trying to find a solution. Nothing worked. One solution I came across didn't consistently remove traces of **NaN**:
+
+```
+// Set max value when you know the duration
+audio.onloadedmetadata = () => {
+    audio.pause();
+    seekbar.max = audio.duration;
+    audio.play();
+}
+```
+I am pausing the audio before the `max value` of the **progress bar** is set to the **total duration** of the **audio** file. After it has been set to the **total duration** of the **audio**, `audio.play()` is triggered. This resulted in `autoplay` when a user would land on the page. I personally find this extremely annoying and a bit jarring, so I decided to bag that route.
+
+After much deliberation and further study of various audio players, I realized that there was a much better and more fitting solution for my application. I aleady was printing the static value of each song's total duration, so there was no need for redundancy in the `#timebox`. When I removed the **total duration**, all traces of `NaN` were gone. That's because `currentTime` no longer was dependent on or linked to total duration, and the container `NaN` resided in was removed!
+
+There is one other ***little*** issue which is not really an issue, but it COULD be considered one if a user decided to click on the **play/pause** button before any other button or clickable element. There is no data available from the FIRST click of the play/pause button. Only the `currentTime`. No `trackId,` no `songName`, no `artist`, and no `song duration`. However, once the user clicks on another button or clickable element storing data, the song data renders to the page on click of the **play/pause** button. If the user is lucky enough to always click on a button or list item, the issue does not surface! 
+
+I put together a really cool playlist as well as a cool audio player, so check it out! 
 
 **Related Resources:**
 
 [Use input type range to seek audio](https://stackoverflow.com/questions/41076205/use-input-type-range-to-seek-audio)
 
 [Using rangeslider.js for an HTML5 audio time scrubber](https://stackoverflow.com/questions/30374409/using-rangeslider-js-for-an-html5-audio-time-scrubber?rq=1)
+
+[Confusion regarding html Web Audio Api and <audio> tag](https://stackoverflow.com/questions/24559772/confusion-regarding-html-web-audio-api-and-audio-tag)
+
+[3 Things You Should Know About Metadata](https://theproaudiofiles.com/metadata/)
+
+[Metadata in Digital Audio Files – What it is, where it is and how to tidy it up.](https://www.cambridgeaudio.com/usa/en/blog/metadata-digital-audio-files-%E2%80%93-what-it-where-it-and-how-tidy-it)
 
 
 
