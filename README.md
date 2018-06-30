@@ -1,18 +1,8 @@
 # Jukebox
 
-## NYCDA Evening JS Intensive Project
+## Welcome To The Groove
 
-## Goal:
-
-Demonstrate an understanding of objects in JavaScript.
-
-**Assignment:**
-
-This **Starter Kit** workshop was designed for us to create the foundation for our subsequent project. We had a bit of time to get familiar with object oriented JavaScript. Now it was time build a Jukebox!
-
-We build a music player that will end up playing any mp3 we can find online (I got mine from the free Youtube music library). We had to think about what functionality we might need for this to work. We had to encapsulate all of this functionality in a JavaScript object so that starting a song is as simple as calling Jukebox.play(). We needed an array of song objects and the ability to play, stop and pause a song. Then we had to think about how we would switch songs. Could we shuffle songs?  We focus on getting the JavaScript to work and keep the HTML/CSS minimal, make it work before we make it look good!
-
-**Hint:** The next project we will be able to continue styling this Jukebox and API integration.
+I built a music player that would end up playing any mp3 we can find online (I got mine from the free Youtube music library). We had to think about what functionality we might need for this to work. We had to encapsulate all of this functionality in a JavaScript object so that starting a song is as simple as calling Jukebox.play(). Ie needed an array of song objects and the ability to play, stop and pause a song. Then Ie had to think about how Ie would switch songs. Could I shuffle songs?  I focus on getting the JavaScript to work and keep the HTML/CSS minimal, make it work before I make it look good!
 
 **Our JavaScript Jukebox should:**
 
@@ -25,11 +15,6 @@ We build a music player that will end up playing any mp3 we can find online (I g
 + Give the user the ability to load at least one different song into the Jukebox besides the one that is loaded when the page initially renders
 
 + The whole Jukebox should be backed by an object called Jukebox with methods to play,  stop, and load songs.
-
-**Extra Challenge:**
-
-Playlist of songs, allows the user to queue up the next song
-Feature to request a random song
 
 **What I have done:**
 
